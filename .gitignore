@@ -1,0 +1,55 @@
+# Visual Paradigm backup files
+*.vpp~
+*.vpp.bak
+*.vpp.bak_*
+*.vpp.lck
+*.vpp.vbak
+.vpprefdata/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Compiled files
+*.class
+*.o
+*.so
+*.dll
+*.exe
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logs
+*.log
+logs/
+
+# Build directories
+bin/
+build/
+target/
+out/
+dist/
+
+# Dependency directories
+node_modules/
+vendor/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
