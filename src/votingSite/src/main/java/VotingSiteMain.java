@@ -9,6 +9,11 @@ import reliableMessage.RMSourcePrx;
 public class VotingSiteMain {
     public static void main(String[] args) {
 
+        new Thread(() -> {
+            System.out.println("Starting ReliableServer...");
+            ReliableMessaging.main(args);
+        }).start();
+
         try (Communicator com = Util.initialize(args, "properties.cfg")) {
 
             ObjectAdapter adapter = com.createObjectAdapter("VotingSiteAdapter");

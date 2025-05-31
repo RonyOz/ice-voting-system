@@ -12,6 +12,8 @@ dependencies{
     implementation 'io.freefair.lombok:io.freefair.lombok.gradle.plugin:8.13.1'
 
     implementation project(':reliableMessaging')
+
+    implementation files("../reliableMessaging/build/libs/reliableMessaging.jar")
 }
 
 jar {
