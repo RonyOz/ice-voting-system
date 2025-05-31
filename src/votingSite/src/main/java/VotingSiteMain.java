@@ -11,7 +11,7 @@ public class VotingSiteMain {
     public static void main(String[] args) throws Exception {
 
         new Thread(() -> {
-            System.out.println("Starting Reliable Server...");
+            System.out.println("[INFO] [RELIABLE MESSAGING] Starting Reliable Server");
             ReliableMessaging.main(new String[0]);
         }).start();
 
@@ -39,7 +39,7 @@ public class VotingSiteMain {
                 controller.processVote(new Vote("Vote " + i, "Candidate " + i));
             }
 
-            System.out.println("Voting Site is running...");
+            System.out.println("[INFO] Voting Site is running");
             com.waitForShutdown();
         } 
 

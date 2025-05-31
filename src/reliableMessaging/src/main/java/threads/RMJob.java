@@ -45,9 +45,11 @@ public class RMJob extends Thread{
     public void run(){
         while (enable) { 
             for(Map.Entry<String,ReliableMessage> rm: messagesPendig.entrySet()){
+                System.out.println("[INFO] [RELIABLE MESSAGING] Cicle");
                 try {
                     notification.sendMessage(rm.getValue());
                     messagesPendig.remove(rm.getKey());
+                    System.out.println("[INFO] [RELIABLE MESSAGING] Message sent: "+ rm.getValue().getUuid());
                     forConfirm.put(rm.getKey(), rm.getValue());
                 } catch (Exception e) {
                     e.printStackTrace();
