@@ -7,12 +7,14 @@ import reliableMessage.RMDestinationPrx;
 import reliableMessage.RMSourcePrx;
 
 public class VotingSiteMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         new Thread(() -> {
-            System.out.println("Starting ReliableServer...");
-            ReliableMessaging.main(args);
+            System.out.println("Starting Reliable Server...");
+            ReliableMessaging.main(new String[0]);
         }).start();
+
+        Thread.sleep(2000);
 
         try (Communicator com = Util.initialize(args, "properties.cfg")) {
 
