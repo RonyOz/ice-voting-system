@@ -6,6 +6,7 @@
  */
 
 rootProject.name = "ice-voting-system"
+include("reliable-messaging")
 include("voting-site")
 include("voting-service")
 include("voting-node")
