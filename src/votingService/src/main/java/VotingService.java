@@ -5,6 +5,11 @@ import com.zeroc.Ice.Util;
 public class VotingService {
     public static void main(String[] args) {
 
+        new Thread(() -> {
+            System.out.println("Starting ReliableServer...");
+            ReliableMessaging.main(args);
+        }).start();
+
         Communicator com = Util.initialize();
         VotingServiceImpl imp = new VotingServiceImpl();
         ObjectAdapter adapter = com.createObjectAdapterWithEndpoints("VotingService", "tcp -h localhost -p 10012");
