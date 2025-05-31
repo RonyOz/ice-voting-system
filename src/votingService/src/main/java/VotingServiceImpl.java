@@ -9,6 +9,7 @@ public class VotingServiceImpl implements RMDestination {
     @Override
     public void receiveMessage(ReliableMessage rmessage, ACKServicePrx prx, Current current) {
         System.out.println("Received message: " + rmessage.getMessage());
+        prx.ack(rmessage.getUuid());
     }
 
 }
