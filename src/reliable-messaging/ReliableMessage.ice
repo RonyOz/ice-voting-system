@@ -10,7 +10,7 @@ module reliableMessage{
         void ack(string messageId);
     }
     interface RMDestination{
-        void reciveMessage(RMessage rmessage, ACKService* prx);
+        void receiveMessage(RMessage rmessage, ACKService* prx);
     }
     interface RMSource{
         void setServerProxy(RMDestination* destination);

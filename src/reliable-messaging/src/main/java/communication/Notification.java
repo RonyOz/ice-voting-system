@@ -21,6 +21,6 @@ public class Notification {
     
 
     public void sendMessage(ReliableMessage message){
-        service.reciveMessage(message, ackService);
+        service.receiveMessage(message, ackService);
     }
 }
