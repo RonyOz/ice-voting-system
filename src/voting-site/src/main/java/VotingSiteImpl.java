@@ -3,6 +3,7 @@ import java.util.List;
 import com.zeroc.Ice.Current;
 
 import Contract.VotingSite;
+import model.Message;
 import reliableMessage.RMSourcePrx;
 import Contract.Vote;
 
@@ -20,7 +21,9 @@ public class VotingSiteImpl implements VotingSite{
     }
 
     public void reportVoteBatch(List<Vote> voteBatch) {
-        rm.sendMessage(voteBatch);
+        Message message = new Message(voteBatch);
+
+        rm.sendMessage(message);
     }
  
 }

@@ -1,6 +1,6 @@
 slice {
     java {
-        files = [file("ReliableMessage.ice")]
+        files = [file("ReliableMessage.ice"),file("../Contract.ice")]
     }
 }
 

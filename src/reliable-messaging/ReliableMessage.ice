@@ -5,7 +5,6 @@ module reliableMessage{
     ["java:serializable:model.Message"]
     sequence<byte> Message;
 
-
     interface ACKService{
         void ack(string messageId);
     }
