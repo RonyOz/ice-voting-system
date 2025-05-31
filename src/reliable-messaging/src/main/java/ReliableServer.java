@@ -5,7 +5,7 @@ import com.zeroc.Ice.Util;
 
 import communication.Notification;
 import reliableMessage.ACKServicePrx;
-import services.RMReciever;
+import services.RMReceiver;
 import services.RMSender;
 import threads.RMJob;
 
@@ -16,7 +16,7 @@ public class ReliableServer {
 
         Notification notification = new Notification();
         RMJob job = new RMJob(notification);
-        RMReciever rec = new RMReciever(job);
+        RMReceiver rec = new RMReceiver(job);
         RMSender sender = new RMSender(job, notification);
 
         ObjectAdapter adapter = communicator.createObjectAdapter("RMService");
