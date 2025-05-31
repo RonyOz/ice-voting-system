@@ -2,7 +2,7 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
-public class VotingService {
+public class VotingServiceMain {
     public static void main(String[] args) {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
