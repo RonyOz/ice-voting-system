@@ -8,18 +8,25 @@ import java.util.concurrent.TimeUnit;
 import Contract.Vote;
 import interfaces.IVotingSiteController;
 
-public class VotingSiteController implements IVotingSiteController{
+public class VotingSiteController implements IVotingSiteController {
 
     private VotingSiteImpl votingSiteImpl;
 
     private List<Vote> votes = new CopyOnWriteArrayList<>();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-
+    private Object lock = new Object();
+    private int counter = 0;
 
     @Override
     public void processVote(Vote vote) {
         votes.add(vote);
-        System.out.println("Vote received: " + vote);
+        synchronized (lock) {
+            counter++;
+        }
+
+        if (counter >= 100000) {
+            System.out.println("Processed 100,000 votes");
+        }
     }
 
     public void setVotingSiteImpl(VotingSiteImpl votingSiteImpl) {
@@ -33,7 +40,7 @@ public class VotingSiteController implements IVotingSiteController{
                 if (!votes.isEmpty()) {
                     // Snapshot and clear buffer
                     List<Vote> batch = new ArrayList<>(votes);
-                    votes.clear();  // Works because CopyOnWriteArrayList handles it safely
+                    votes.clear(); // Works because CopyOnWriteArrayList handles it safely
 
                     System.out.println("Dispatching batch of votes: " + batch.size());
                     // Send batch to the interface
@@ -42,7 +49,7 @@ public class VotingSiteController implements IVotingSiteController{
             } catch (Exception e) {
                 e.printStackTrace(); // Log error
             }
-        }, 0, 5, TimeUnit.SECONDS); 
+        }, 0, 500, TimeUnit.MILLISECONDS);
     }
 
 }

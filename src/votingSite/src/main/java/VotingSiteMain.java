@@ -35,7 +35,7 @@ public class VotingSiteMain {
             // Hasta aqui estoy exponinedo mis interfaces
             adapter.activate();
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100000; i++) {
                 controller.processVote(new Vote("Vote " + i, "Candidate " + i));
             }
 
