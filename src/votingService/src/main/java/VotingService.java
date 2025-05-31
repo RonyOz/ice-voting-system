@@ -5,8 +5,6 @@ import com.zeroc.Ice.Util;
 public class VotingService {
     public static void main(String[] args) {
 
-
-
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
             ObjectAdapter adapter = communicator.createObjectAdapter("votingServices");
             VotingServiceImpl votingService = new VotingServiceImpl();
