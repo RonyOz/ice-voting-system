@@ -36,8 +36,9 @@ public class VotingSiteMain {
 
             // Hasta aqui estoy exponinedo mis interfaces
             adapter.activate();
-            System.out.println("Voting Site is running...");
+            System.out.println("[INFO] Voting Site is running");
 
+            // TEMPORAL: simulate votes
             for (int i = 0; i < 100000; i++) {
                 controller.processVote(new Vote("Vote " + i, "Candidate " + i));
             }
