@@ -6,9 +6,6 @@ import reliableMessage.RMDestination;
 
 public class VotingServiceImpl implements RMDestination {  //VotingServicePrx
 
-    private int messageCount = 0;
-    private Object lock = new Object();
-
     private VotingServiceController controller;
 
     public VotingServiceImpl(VotingServiceController controller) {
@@ -17,12 +14,6 @@ public class VotingServiceImpl implements RMDestination {  //VotingServicePrx
 
     @Override
     public void receiveMessage(ReliableMessage rmessage, ACKServicePrx prx, Current current) {
-
-        synchronized (lock) {
-            messageCount += rmessage.getMessage().voteBatch.size();
-        }
-
-        System.out.println("Total messages processed: " + messageCount);
 
         prx.ack(rmessage.getUuid());
 
