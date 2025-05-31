@@ -10,4 +10,4 @@ rootProject.name = "ice-voting-system"
 include("reliableMessaging")
 include("votingSite")
 include("votingService")
-include("voting-node")
+include("votingNode")
