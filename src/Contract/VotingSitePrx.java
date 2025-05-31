@@ -17,6 +17,42 @@ package Contract;
 
 public interface VotingSitePrx extends com.zeroc.Ice.ObjectPrx
 {
+    default void sendVote(Vote vote)
+    {
+        sendVote(vote, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void sendVote(Vote vote, java.util.Map<String, String> context)
+    {
+        _iceI_sendVoteAsync(vote, context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote)
+    {
+        return _iceI_sendVoteAsync(vote, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote, java.util.Map<String, String> context)
+    {
+        return _iceI_sendVoteAsync(vote, context, false);
+    }
+
+    /**
+     * @hidden
+     * @param iceP_vote -
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_sendVoteAsync(Vote iceP_vote, java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "sendVote", null, sync, null);
+        f.invoke(false, context, null, ostr -> {
+                     Vote.ice_write(ostr, iceP_vote);
+                 }, null);
+        return f;
+    }
+
     /**
      * Contacts the remote server to verify that the object implements this type.
      * Raises a local exception if a communication error occurs.
