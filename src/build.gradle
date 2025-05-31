@@ -1,5 +1,7 @@
 plugins {
   id("com.zeroc.gradle.ice-builder.slice") version "1.5.2" apply false
+
+  id("io.freefair.lombok") version "8.13.1"
 }
 
 subprojects{
@@ -7,6 +9,7 @@ subprojects{
     apply plugin: 'java'
     apply plugin: 'application'
     apply plugin: 'com.zeroc.gradle.ice-builder.slice'
+    apply plugin: 'io.freefair.lombok'
     
 }
 
