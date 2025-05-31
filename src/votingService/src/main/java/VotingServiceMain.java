@@ -14,7 +14,7 @@ public class VotingServiceMain {
             adapter.add(votingService, Util.stringToIdentity("votingService"));
             adapter.activate();
 
-            System.out.println("[INFO] Voting Service is running...");
+            System.out.println("[INFO] Voting Service is running");
 
             communicator.waitForShutdown();
 
