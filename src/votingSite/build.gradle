@@ -19,7 +19,7 @@ dependencies{
 jar {
         manifest {
             attributes(
-                "Main-Class": project.name.capitalize() + "Main",
+                "Main-Class": project.name.capitalize()+"Main",
                 "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
             )
         }

@@ -17,6 +17,7 @@ public class VotingSiteImpl implements VotingSite{
         this.rm = rm;
     }
 
+    @Override
     public void sendVote(Vote vote, Current current) {
         controller.processVote(vote);
     }
