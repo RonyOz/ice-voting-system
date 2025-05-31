@@ -3,6 +3,7 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
+import Contract.Vote;
 import reliableMessage.RMDestinationPrx;
 import reliableMessage.RMSourcePrx;
 
@@ -34,7 +35,12 @@ public class VotingSiteMain {
             // Hasta aqui estoy exponinedo mis interfaces
             adapter.activate();
 
+            for (int i = 0; i < 100; i++) {
+                controller.processVote(new Vote("Vote " + i, "Candidate " + i));
+            }
+
             System.out.println("Voting Site is running...");
+            com.waitForShutdown();
         } 
 
     }

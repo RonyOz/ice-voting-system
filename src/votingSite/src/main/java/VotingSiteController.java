@@ -35,13 +35,14 @@ public class VotingSiteController implements IVotingSiteController{
                     List<Vote> batch = new ArrayList<>(votes);
                     votes.clear();  // Works because CopyOnWriteArrayList handles it safely
 
+                    System.out.println("Dispatching batch of votes: " + batch.size());
                     // Send batch to the interface
                     votingSiteImpl.reportVoteBatch(batch);
                 }
             } catch (Exception e) {
                 e.printStackTrace(); // Log error
             }
-        }, 0, 1, TimeUnit.SECONDS); 
+        }, 0, 5, TimeUnit.SECONDS); 
     }
 
 }
