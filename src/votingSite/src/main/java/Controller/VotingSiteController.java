@@ -36,14 +36,14 @@ public class VotingSiteController implements IVotingSiteController {
     private void processBatch(List<Vote> voteBatch) {
         try {
             if (!voteBatch.isEmpty()) {
-                System.out.println("Processing batch of " + voteBatch.size() + " votes");
+                System.out.println("[INFO] Processing batch of " + voteBatch.size() + " votes");
 
                 Thread.sleep(10); //Sleep, so server doesn't crash
 
                 votingSiteImpl.reportVoteBatch(voteBatch);
             }
         } catch (Exception e) {
-            System.err.println("Error processing vote batch: " + e.getMessage());
+            System.err.println("[ERRRO] Failed to processing vote batch: " + e.getMessage());
             e.printStackTrace();
         }
     }
