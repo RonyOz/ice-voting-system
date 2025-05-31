@@ -5,6 +5,8 @@
 *.vpp.lck
 *.vpp.vbak
 .vpprefdata/
+doc/vpp/.lock
+doc/vpp/tmp/
 
 # IDE files
 .idea/
@@ -52,5 +54,3 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-
-doc/vpp/.lock
