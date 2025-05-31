@@ -9,7 +9,7 @@ import services.RMReceiver;
 import services.RMSender;
 import threads.RMJob;
 
-public class ReliableServer {
+public class ReliableMessaging {
     
     public static void main(String[] args) {
         Communicator communicator = Util.initialize(args, "rmservice.config");
