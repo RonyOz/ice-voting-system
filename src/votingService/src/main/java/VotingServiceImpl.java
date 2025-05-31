@@ -4,13 +4,21 @@ import model.ReliableMessage;
 import reliableMessage.ACKServicePrx;
 import reliableMessage.RMDestination;
 
-public class VotingServiceImpl implements RMDestination {
+public class VotingServiceImpl implements RMDestination {  //VotingServicePrx
+
+    private VotingServiceController controller;
+
+    public VotingServiceImpl(VotingServiceController controller) {
+        this.controller = controller;
+    }
 
     @Override
     public void receiveMessage(ReliableMessage rmessage, ACKServicePrx prx, Current current) {
-        System.out.println("Received message: " + rmessage.getMessage());
-        System.out.println("Batch size: " + rmessage.getMessage().voteBatch.size());
         prx.ack(rmessage.getUuid());
+
+        System.out.println("[INFO] Received batch with size: " + rmessage.getMessage().voteBatch.size());
+
+        controller.registerVotesFromSite(rmessage.getMessage().voteBatch);
     }
 
 }

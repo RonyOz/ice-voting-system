@@ -7,14 +7,19 @@ public class VotingService {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
             ObjectAdapter adapter = communicator.createObjectAdapter("votingServices");
-            VotingServiceImpl votingService = new VotingServiceImpl();
+
+            VotingServiceController controller = new VotingServiceController();
+            VotingServiceImpl votingService = new VotingServiceImpl(controller);
+
             adapter.add(votingService, Util.stringToIdentity("votingService"));
             adapter.activate();
-            System.out.println("Voting Service is running...");
+
+            System.out.println("[INFO] Voting Service is running...");
+
             communicator.waitForShutdown();
 
         } catch (Exception e) {
-            System.err.println("Error initializing communicator: " + e.getMessage());
+            System.err.println("[ERROR] Error initializing communicator: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
