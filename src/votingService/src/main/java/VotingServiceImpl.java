@@ -1,5 +1,6 @@
 import com.zeroc.Ice.Current;
 
+import controller.VotingServiceController;
 import model.ReliableMessage;
 import reliableMessage.ACKServicePrx;
 import reliableMessage.RMDestination;
