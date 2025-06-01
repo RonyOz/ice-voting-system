@@ -21,7 +21,7 @@ public class VotingServiceController implements IVotingServiceController {
 
             // Guardar los votos en la base de datos H2
             repository.saveAll(voteBatch);
-            System.out.println("[INFO] Votes registered successfully from site.");
+            System.out.println("[INFO] Vote Batch registered successfully");
 
         }
         
@@ -33,7 +33,7 @@ public class VotingServiceController implements IVotingServiceController {
         for (Vote vote : voteBatch) {
             if (repository.exists(vote.voterId, vote.candidateId)) {
                 hasDuplicates = true;
-                System.out.println("[WARNING] Duplicate vote detected for voter: " + vote.voterId + " and candidate: "
+                System.out.println("[WARNING] Duplicated vote detected for voter: " + vote.voterId + " and candidate: "
                         + vote.candidateId);
             }
         }

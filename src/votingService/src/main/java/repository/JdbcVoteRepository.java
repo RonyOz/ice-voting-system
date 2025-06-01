@@ -59,12 +59,6 @@ public class JdbcVoteRepository implements IVoteRepository {
             }
         }
 
-        if (!allSaved) {
-            System.err.println("[ERROR] [H2] Not all votes were saved successfully.");
-        } else {
-            System.out.println("[INFO] [H2] voteBatch saved successfully.");
-        }
-
         return allSaved;
     }
 
