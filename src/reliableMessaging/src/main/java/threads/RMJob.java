@@ -52,12 +52,14 @@ public class RMJob extends Thread{
                     System.out.println("[INFO] [RELIABLE MESSAGING] Message sent: "+ rm.getValue().getUuid());
                     forConfirm.put(rm.getKey(), rm.getValue());
                 } catch (Exception e) {
+                    System.err.println("[ERROR] [RELIABLE MESSAGING] Failed to send message: " + rm.getValue().getUuid());
                     e.printStackTrace();
                 }
             }
             try {
                 Thread.sleep(10000);
             } catch (Exception e) {
+                System.err.println("[ERROR] [RELIABLE MESSAGING] Error in RMJob sleep: " + e.getMessage());
                 e.printStackTrace();
             }
         }
