@@ -51,8 +51,7 @@ public class RMJob extends Thread{
                     System.out.println("[INFO] [RELIABLE MESSAGING] Message sent: "+ rm.getValue().getUuid());
                     forConfirm.put(rm.getKey(), rm.getValue());
                 } catch (Exception e) {
-                    System.err.println("[ERROR] [RELIABLE MESSAGING] Failed to send message: " + rm.getValue().getUuid());
-                    e.printStackTrace();
+                    System.err.println("[ERROR] [RELIABLE MESSAGING] " + e.getMessage() + " - msg: " + rm.getValue().getUuid());
                 }
             }
             try {
