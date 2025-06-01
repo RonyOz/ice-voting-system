@@ -15,11 +15,12 @@ public class VotingNodeImpl implements VotingNode {
     // despues se debe validar los diferentes casos y colocar los mensajes tipo
     // ERROR_ENVÍO: document  motivo TIMEOUT o EXCEPCIÓN
     @Override
-    public void vote(String document, String candidateId, Current current) {
-        throw new UnsupportedOperationException("Unimplemented method 'vote'");
+    public int vote(String document, String candidateId, Current current) {
+        return votingNodeController.vote(document, candidateId);
     }
 
-    public void votar(String voterId, String candidateId) {
-        votingNodeController.vote(voterId, candidateId);
+    public int voteCLI(String document, String candidateId) {
+        return votingNodeController.vote(document, candidateId);
     }
+
 }

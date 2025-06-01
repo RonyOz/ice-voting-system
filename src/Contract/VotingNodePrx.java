@@ -17,22 +17,22 @@ package Contract;
 
 public interface VotingNodePrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void vote(String voterId, String candidateId)
+    default int vote(String voterId, String candidateId)
     {
-        vote(voterId, candidateId, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return vote(voterId, candidateId, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void vote(String voterId, String candidateId, java.util.Map<String, String> context)
+    default int vote(String voterId, String candidateId, java.util.Map<String, String> context)
     {
-        _iceI_voteAsync(voterId, candidateId, context, true).waitForResponse();
+        return _iceI_voteAsync(voterId, candidateId, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> voteAsync(String voterId, String candidateId)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> voteAsync(String voterId, String candidateId)
     {
         return _iceI_voteAsync(voterId, candidateId, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> voteAsync(String voterId, String candidateId, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> voteAsync(String voterId, String candidateId, java.util.Map<String, String> context)
     {
         return _iceI_voteAsync(voterId, candidateId, context, false);
     }
@@ -45,13 +45,17 @@ public interface VotingNodePrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_voteAsync(String iceP_voterId, String iceP_candidateId, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_voteAsync(String iceP_voterId, String iceP_candidateId, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "vote", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "vote", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_voterId);
                      ostr.writeString(iceP_candidateId);
-                 }, null);
+                 }, istr -> {
+                     int ret;
+                     ret = istr.readInt();
+                     return ret;
+                 });
         return f;
     }
 

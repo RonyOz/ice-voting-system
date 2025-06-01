@@ -6,7 +6,7 @@ module Contract { //Name of the folder where it will be compiled
     }
 
     interface VotingNode{
-        void vote(string voterId, string candidateId);
+        int vote(string voterId, string candidateId);
     }
 
     interface VotingSite{

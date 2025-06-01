@@ -11,12 +11,18 @@ public class VotingNodeController implements IVotingNodeController {
         this.votingSitePrx = votingSitePrx;
     }
 
+    // aqui debe implementarse la logica : Retorna 0 si puede votar; 1 si no es su mesa; 2 si está tratando de votar por segunda vez; 3 si no aparece en toda la bd
+
     @Override
-    public void vote(String voterId, String candidateId) {
+    public int vote(String voterId, String candidateId) {
+
         Vote vote = new Vote(voterId, candidateId);
         votingSitePrx.sendVote(vote);
 
         String mesaId = java.util.UUID.randomUUID().toString();
+        
         System.out.println("[INFO] [VOTE SENDED]: " + voterId + " " + candidateId + " " + mesaId);
+
+        return 0;
     }
 }

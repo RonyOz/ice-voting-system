@@ -4,6 +4,8 @@ import controller.VotingNodeController;
 
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Util;
+import com.zeroc.Ice.ObjectAdapter;
+
 
 import java.util.Scanner;
 
@@ -13,6 +15,9 @@ public class VotingNode {
 
 
         try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
+
+            ObjectAdapter adapter = communicator.createObjectAdapter("VoteStation");
+
 
             String proxyProperty = communicator.getProperties().getProperty("VotingSite.Proxy");
             VotingSitePrx votingSitePrx = VotingSitePrx.checkedCast(
@@ -26,6 +31,9 @@ public class VotingNode {
             VotingNodeController controller = new VotingNodeController(votingSitePrx);
             VotingNodeImpl node = new VotingNodeImpl(controller);
 
+            adapter.add(node, Util.stringToIdentity("VoteStation"));
+
+
             // Scanner scanner = new Scanner(System.in);
             // while (true) {
             //     System.out.print("Ingrese su ID de votante: ");
@@ -37,7 +45,7 @@ public class VotingNode {
 
 
             for (int i = 0; i < 100000; i++) {
-                node.votar("voterId" + i, "candidateId" + i);
+                node.voteCLI("voterId" + i, "candidateId" + i);
             }
 
         } catch (Exception e) {
