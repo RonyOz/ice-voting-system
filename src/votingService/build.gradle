@@ -9,7 +9,8 @@ repositories {
 
 dependencies{
     implementation 'com.zeroc:ice:3.7.2'
-
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    implementation("com.h2database:h2:2.3.232")
     implementation project(':reliableMessaging')
 }
 
