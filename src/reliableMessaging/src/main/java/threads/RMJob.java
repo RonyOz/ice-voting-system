@@ -45,7 +45,6 @@ public class RMJob extends Thread{
     public void run(){
         while (enable) { 
             for(Map.Entry<String,ReliableMessage> rm: messagesPendig.entrySet()){
-                System.out.println("[INFO] [RELIABLE MESSAGING] Cicle");
                 try {
                     notification.sendMessage(rm.getValue());
                     messagesPendig.remove(rm.getKey());
@@ -58,6 +57,7 @@ public class RMJob extends Thread{
             }
             try {
                 Thread.sleep(10000);
+                System.out.println("[INFO] [RELIABLE MESSAGING] Cicle " + sequenceNumber + " completed. Pending messages: " + messagesPendig.size());
             } catch (Exception e) {
                 System.err.println("[ERROR] [RELIABLE MESSAGING] Error in RMJob sleep: " + e.getMessage());
                 e.printStackTrace();
