@@ -65,9 +65,13 @@ public class VotingNode {
                     }
                     node.voteCLI(voterId, candidateId);
                 } else if (option == 2) {
+                    adapter.deactivate();
                     System.out.print("Ingrese el ID del nodo: ");
                     String nodeId = scanner.nextLine();
-                    fire(node, nodeId);
+                    System.out.print("Ingrese el número de votos a enviar: ");
+                    int numVotes = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    fire(node, nodeId, numVotes);
                 } else {
                     System.out.println("Opción no válida. Intente de nuevo.");
                 }
@@ -78,8 +82,8 @@ public class VotingNode {
         }
     }
 
-    public static void fire(VotingNodeImpl node, String nodeId) {
-        for (int i = 0; i < 50000; i++) {
+    public static void fire(VotingNodeImpl node, String nodeId, int numVotes) {
+        for (int i = 0; i < numVotes; i++) {
             node.voteCLI(nodeId + "_voterId" + i, nodeId + "_candidateId" + i);
         }
     }

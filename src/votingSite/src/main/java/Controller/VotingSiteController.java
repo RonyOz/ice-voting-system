@@ -12,7 +12,7 @@ public class VotingSiteController implements IVotingSiteController {
     private BatchingController voteBatcher;
 
     // Batch configuration
-    private static final int BATCH_SIZE = 10000; // Process batches of 50 votes
+    private static final int BATCH_SIZE = 1000; // Process batches of 1000 votes
     private static final long TIMEOUT_MS = 500; // Wait max 500ms for batch to fill
 
     @Override
