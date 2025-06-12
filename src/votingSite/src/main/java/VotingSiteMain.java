@@ -4,7 +4,6 @@ import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
 import Comunication.VotingSiteImpl;
-import Contract.Vote;
 import Controller.VotingSiteController;
 import reliableMessage.RMDestinationPrx;
 import reliableMessage.RMSourcePrx;
