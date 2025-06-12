@@ -12,6 +12,8 @@ import java.util.Scanner;
 public class VotingNode {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
         try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
 
             ObjectAdapter adapter = communicator.createObjectAdapter("VoteStation");
@@ -31,7 +33,6 @@ public class VotingNode {
             adapter.add(node, Util.stringToIdentity("VoteStation"));
 
 
-            Scanner scanner = new Scanner(System.in);
             // Mostrar lista de candidatos al inicio y permitir elegir uno
             String[] candidatos = {"1. Juan Pérez", "2. Ana Gómez", "3. Luis Torres", "4. María Ruiz"};
 
@@ -80,6 +81,8 @@ public class VotingNode {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        scanner.close();        
     }
 
     public static void fire(VotingNodeImpl node, String nodeId, int numVotes) {
