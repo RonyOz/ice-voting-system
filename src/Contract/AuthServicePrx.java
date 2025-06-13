@@ -17,38 +17,40 @@ package Contract;
 
 public interface AuthServicePrx extends com.zeroc.Ice.ObjectPrx
 {
-    default int authenticate(String voterId)
+    default int authenticate(String voterId, String mesaId)
     {
-        return authenticate(voterId, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return authenticate(voterId, mesaId, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default int authenticate(String voterId, java.util.Map<String, String> context)
+    default int authenticate(String voterId, String mesaId, java.util.Map<String, String> context)
     {
-        return _iceI_authenticateAsync(voterId, context, true).waitForResponse();
+        return _iceI_authenticateAsync(voterId, mesaId, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> authenticateAsync(String voterId)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> authenticateAsync(String voterId, String mesaId)
     {
-        return _iceI_authenticateAsync(voterId, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_authenticateAsync(voterId, mesaId, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> authenticateAsync(String voterId, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> authenticateAsync(String voterId, String mesaId, java.util.Map<String, String> context)
     {
-        return _iceI_authenticateAsync(voterId, context, false);
+        return _iceI_authenticateAsync(voterId, mesaId, context, false);
     }
 
     /**
      * @hidden
      * @param iceP_voterId -
+     * @param iceP_mesaId -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_authenticateAsync(String iceP_voterId, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_authenticateAsync(String iceP_voterId, String iceP_mesaId, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "authenticate", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_voterId);
+                     ostr.writeString(iceP_mesaId);
                  }, istr -> {
                      int ret;
                      ret = istr.readInt();

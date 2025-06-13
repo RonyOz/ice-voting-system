@@ -13,7 +13,7 @@ public class AuthServiceController implements IAuthServiceController {
 
     // aqui debe implementarse la logica : Retorna 0 si puede votar; 1 si no es su mesa; 2 si está tratando de votar por segunda vez; 3 si no aparece en toda la bd
     @Override
-    public int authenticate(String voterId) {
+    public int authenticate(String voterId, String tableId) {
 
     }
 }

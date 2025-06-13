@@ -24,6 +24,11 @@ public class AuthServiceMain {
 
             System.out.println("[INFO] Auth Service is running");
 
+            // Add shutdown hook to clean up resources
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                authService.shutdown();
+            }));
+
             communicator.waitForShutdown();
 
         } catch (Exception e) {

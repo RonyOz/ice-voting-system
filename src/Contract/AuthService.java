@@ -17,7 +17,7 @@ package Contract;
 
 public interface AuthService extends com.zeroc.Ice.Object
 {
-    int authenticate(String voterId, com.zeroc.Ice.Current current);
+    int authenticate(String voterId, String mesaId, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -55,9 +55,11 @@ public interface AuthService extends com.zeroc.Ice.Object
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
         String iceP_voterId;
+        String iceP_mesaId;
         iceP_voterId = istr.readString();
+        iceP_mesaId = istr.readString();
         inS.endReadParams();
-        int ret = obj.authenticate(iceP_voterId, current);
+        int ret = obj.authenticate(iceP_voterId, iceP_mesaId, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
         ostr.writeInt(ret);
         inS.endWriteParams(ostr);
