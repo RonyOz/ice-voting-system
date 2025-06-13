@@ -8,12 +8,12 @@ import java.util.concurrent.TimeUnit;
 import Contract.AuthService;
 import controller.AuthServiceController;
 
-public class AuthserviceImpl implements AuthService {
+public class AuthServiceImpl implements AuthService {
 
     private final AuthServiceController authServiceController;
     private final ExecutorService threadPool;
 
-    public AuthserviceImpl(AuthServiceController authServiceController) {
+    public AuthServiceImpl(AuthServiceController authServiceController) {
         this.authServiceController = authServiceController;
         // Crete the thread pool with the number of processors available
         this.threadPool = Executors.newFixedThreadPool(

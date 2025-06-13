@@ -3,9 +3,9 @@ import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
 import controller.AuthServiceController;
-import controller.AuthServiceImpl;
+import comunication.AuthServiceImpl;
 
-public class AuthServiceMain {
+public class AuthService {
     public static void main(String[] args) {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
