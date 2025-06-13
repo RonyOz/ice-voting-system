@@ -17,8 +17,6 @@ module Contract { //Name of the folder where it will be compiled
 
     // }
 
-    interface AuthService {
-        int authenticate(string voterId);
-    }
+ 
     
 }
