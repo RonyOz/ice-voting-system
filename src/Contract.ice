@@ -16,5 +16,7 @@ module Contract { //Name of the folder where it will be compiled
     // interface VotingService{ // This interface is not used in the current implementation because the definition is the RMDestination of reliable messaging
 
     // }
+
+ 
     
 }
