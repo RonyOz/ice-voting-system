@@ -1,4 +1,5 @@
 package comunication;
+
 import com.zeroc.Ice.Current;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import Contract.AuthService;
 import controller.AuthServiceController;
 
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements AuthServiceMain {
 
     private final AuthServiceController authServiceController;
     private final ExecutorService threadPool;

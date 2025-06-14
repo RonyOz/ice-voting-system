@@ -5,7 +5,7 @@ import com.zeroc.Ice.Util;
 import controller.AuthServiceController;
 import comunication.AuthServiceImpl;
 
-public class AuthService {
+public class AuthServiceMain {
     public static void main(String[] args) {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
