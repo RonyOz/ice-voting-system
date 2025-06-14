@@ -5,6 +5,13 @@ module Contract { //Name of the folder where it will be compiled
         string candidateId; // Unique identifier for the candidate
     }
 
+    struct Candidate {
+        string candidateId;
+        string name;
+    }
+
+    sequence<Candidate> CandidateSeq;
+
     interface VotingNode{
         int vote(string voterId, string candidateId);
     }
@@ -19,6 +26,13 @@ module Contract { //Name of the folder where it will be compiled
 
     interface AuthService {
         int authenticate(string voterId, string mesaId);
+    }
+
+    interface ConsultService {
+        string getVotingLocation(string voterId);
+        CandidateSeq setCandidates();
+        CandidateSeq getCandidates();
+        string getResults();
     }
     
 }
