@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import Contract.AuthService;
 import controller.AuthServiceController;
 
-public class AuthServiceImpl implements AuthServiceMain {
+public class AuthServiceImpl implements AuthService {
 
     private final AuthServiceController authServiceController;
     private final ExecutorService threadPool;
