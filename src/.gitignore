@@ -6,3 +6,8 @@ build
 
 # Ignore files .db
 *.db
+
+db/node/
+db/registry/
+
+*.mdb

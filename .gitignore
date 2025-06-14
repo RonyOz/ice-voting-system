@@ -54,3 +54,9 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+
+.classpath
+.project
+.factorproject
+.settings/
+.factorypath
