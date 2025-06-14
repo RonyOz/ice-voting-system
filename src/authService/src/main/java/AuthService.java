@@ -9,7 +9,7 @@ public class AuthService {
     public static void main(String[] args) {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
-            ObjectAdapter adapter = communicator.createObjectAdapter("authService");
+            ObjectAdapter adapter = communicator.createObjectAdapter("AuthServiceAdapter");
 
             // TODO: Reemplazar con la conexion a Redis
             // DBConnection dbConnection = new DBConnection(communicator);
@@ -19,7 +19,7 @@ public class AuthService {
         
             AuthServiceImpl authService = new AuthServiceImpl(controller);
 
-            adapter.add(authService, Util.stringToIdentity("authService"));
+            adapter.add(authService, Util.stringToIdentity("AuthService"));
             adapter.activate();
 
             System.out.println("[INFO] Auth Service is running");

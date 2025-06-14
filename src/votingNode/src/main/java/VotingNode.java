@@ -49,6 +49,7 @@ public class VotingNode {
             // Add the node to the adapter with identity "VoteStation"
             adapter.add(node, Util.stringToIdentity("VoteStation"));
 
+
             // List of available candidates
             String[] candidatos = {"1. Juan Pérez", "2. Ana Gómez", "3. Luis Torres", "4. María Ruiz"};
 
