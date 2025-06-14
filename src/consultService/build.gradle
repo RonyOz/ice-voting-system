@@ -1,15 +1,7 @@
-
 slice {
     java {
         files = [file("../Contract.ice")]
     }
-}
-repositories {
-    mavenCentral()
-}
-
-dependencies{
-    implementation 'com.zeroc:ice:3.7.2'
 }
 
 jar {

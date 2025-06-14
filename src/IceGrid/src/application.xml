@@ -15,6 +15,19 @@
         <property name="IceMX.Metrics.ByParent.GroupBy" value="parent"/>
         <property name="IceMX.Metrics.ByParent.Disabled" value="1"/>
       </server>
+
+      <server id="AuthService" exe="java" activation="on-demand">
+        <option>-jar</option>
+        <option>../../authService/build/libs/votingService.jar</option>
+        <adapter name="votingServices" endpoints="tcp -h localhost">
+          <object identity="votingService" type="::Contract::VotingService" property="Identity"/>
+        </adapter>
+
+        <property name="IceMX.Metrics.Debug.GroupBy" value="id"/>
+        <property name="IceMX.Metrics.Debug.Disabled" value="1"/>
+        <property name="IceMX.Metrics.ByParent.GroupBy" value="parent"/>
+        <property name="IceMX.Metrics.ByParent.Disabled" value="1"/>
+      </server>
     </node>
 
   </application>
