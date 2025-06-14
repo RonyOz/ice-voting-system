@@ -2,6 +2,8 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
+import communication.ConsultServiceImpl;
+
 
 public class ConsultServiceMain {
         public static void main(String[] args) {
@@ -14,10 +16,10 @@ public class ConsultServiceMain {
 
             // VotingServiceController controller = new VotingServiceController(new JdbcVoteRepository(dbConnection.getConnection()));
         
-            // VotingServiceImpl votingService = new VotingServiceImpl(controller);
+            ConsultServiceImpl votingService = new ConsultServiceImpl();
 
-            // adapter.add(votingService, Util.stringToIdentity("votingService"));
-            // adapter.activate();
+            adapter.add(votingService, Util.stringToIdentity("consultService"));
+            adapter.activate();
 
             System.out.println("[INFO] Consult Service is running");
 
