@@ -17,7 +17,7 @@ package Contract;
 
 public interface VotingSite extends com.zeroc.Ice.Object
 {
-    void sendVote(Vote vote, com.zeroc.Ice.Current current);
+    void sendVote(Vote vote, String nodeVoteID, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -55,9 +55,11 @@ public interface VotingSite extends com.zeroc.Ice.Object
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
         Vote iceP_vote;
+        String iceP_nodeVoteID;
         iceP_vote = Vote.ice_read(istr);
+        iceP_nodeVoteID = istr.readString();
         inS.endReadParams();
-        obj.sendVote(iceP_vote, current);
+        obj.sendVote(iceP_vote, iceP_nodeVoteID, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 

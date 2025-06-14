@@ -5,6 +5,7 @@ import com.zeroc.Ice.Util;
 import com.zeroc.IceGrid.QueryPrx;
 
 import Comunication.VotingSiteImpl;
+import Contract.AuthServicePrx;
 import Controller.VotingSiteController;
 import reliableMessage.RMDestinationPrx;
 import reliableMessage.RMSourcePrx;
@@ -30,7 +31,9 @@ public class VotingSiteMain {
       RMSourcePrx rm = RMSourcePrx.checkedCast(com.propertyToProxy("RMSource.Proxy"));
       rm.setServerProxy(dest);
 
-      VotingSiteController controller = new VotingSiteController();
+      AuthServicePrx authServicePrx = AuthServicePrx.checkedCast(query.findObjectByType("::Contract::AuthService"));
+
+      VotingSiteController controller = new VotingSiteController(authServicePrx);
       VotingSiteImpl votingSiteInterface = new VotingSiteImpl(controller, rm);
       controller.setVotingSiteImpl(votingSiteInterface);
 
