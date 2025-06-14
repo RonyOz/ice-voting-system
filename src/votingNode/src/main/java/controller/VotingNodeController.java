@@ -1,25 +1,31 @@
 package controller;
 import interfaces.IVotingNodeController;
+import Contract.AuthServicePrx;
 import Contract.Vote;
 import Contract.VotingSitePrx;
 
 public class VotingNodeController implements IVotingNodeController {
 
     private final VotingSitePrx votingSitePrx;
+    private final AuthServicePrx authServicePrx;
 
-    public VotingNodeController(VotingSitePrx votingSitePrx) {
+    public VotingNodeController(VotingSitePrx votingSitePrx, AuthServicePrx authServicePrx) {
         this.votingSitePrx = votingSitePrx;
+        this.authServicePrx = authServicePrx;
     }
 
-    // aqui debe implementarse la logica : Retorna 0 si puede votar; 1 si no es su mesa; 2 si está tratando de votar por segunda vez; 3 si no aparece en toda la bd
 
     @Override
     public int vote(String voterId, String candidateId) {
 
+        //TODO: Ver donde se genera el mesaId
+        String mesaId = java.util.UUID.randomUUID().toString();
+
+        int authResult = authServicePrx.authenticate(voterId, mesaId);
+
         Vote vote = new Vote(voterId, candidateId);
         votingSitePrx.sendVote(vote);
 
-        String mesaId = java.util.UUID.randomUUID().toString();
         
         System.out.println("[INFO] [VOTE SENDED]: " + voterId + " " + candidateId + " " + mesaId);
 

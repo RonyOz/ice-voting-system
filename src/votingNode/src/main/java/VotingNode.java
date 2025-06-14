@@ -1,5 +1,6 @@
 // Required imports for Ice communication and voting functionality
 import Contract.VotingSitePrx;
+import Contract.AuthServicePrx;
 import comunication.VotingNodeImpl;
 import controller.VotingNodeController;
 
@@ -20,6 +21,19 @@ public class VotingNode {
 
             // Get the proxy to communicate with the VotingSite
             String proxyProperty = communicator.getProperties().getProperty("VotingSite.Proxy");
+
+            // Get the proxy to communicate with the AuthService
+            String authServiceProxyProperty = communicator.getProperties().getProperty("AuthService.Proxy");
+
+            AuthServicePrx authServicePrx = AuthServicePrx.checkedCast(
+                    communicator.stringToProxy(authServiceProxyProperty));
+                    
+            if (authServicePrx == null) {
+                System.err.println("No se pudo obtener el proxy de AuthService.");
+                return;
+            }
+
+
             VotingSitePrx votingSitePrx = VotingSitePrx.checkedCast(
                     communicator.stringToProxy(proxyProperty));
                     
@@ -29,11 +43,12 @@ public class VotingNode {
             }
 
             // Initialize the controller and node implementation
-            VotingNodeController controller = new VotingNodeController(votingSitePrx);
+            VotingNodeController controller = new VotingNodeController(votingSitePrx, authServicePrx);
             VotingNodeImpl node = new VotingNodeImpl(controller);
 
             // Add the node to the adapter with identity "VoteStation"
             adapter.add(node, Util.stringToIdentity("VoteStation"));
+
 
             // List of available candidates
             String[] candidatos = {"1. Juan Pérez", "2. Ana Gómez", "3. Luis Torres", "4. María Ruiz"};
