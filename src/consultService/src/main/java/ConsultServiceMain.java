@@ -3,7 +3,7 @@ import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
 import controller.ConsultServiceController;
-import impl.ConsultServiceImpl;
+import communication.ConsultServiceImpl;
 
 public class ConsultServiceMain {
 
