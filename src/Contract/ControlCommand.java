@@ -17,7 +17,7 @@ package Contract;
 
 public interface ControlCommand extends com.zeroc.Ice.Object
 {
-    void sendCommand(String message, com.zeroc.Ice.Current current);
+    void receiveCommand(String command, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -50,14 +50,14 @@ public interface ControlCommand extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_sendCommand(ControlCommand obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_receiveCommand(ControlCommand obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        String iceP_message;
-        iceP_message = istr.readString();
+        String iceP_command;
+        iceP_command = istr.readString();
         inS.endReadParams();
-        obj.sendCommand(iceP_message, current);
+        obj.receiveCommand(iceP_command, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -68,7 +68,7 @@ public interface ControlCommand extends com.zeroc.Ice.Object
         "ice_ids",
         "ice_isA",
         "ice_ping",
-        "sendCommand"
+        "receiveCommand"
     };
 
     /** @hidden */
@@ -102,7 +102,7 @@ public interface ControlCommand extends com.zeroc.Ice.Object
             }
             case 4:
             {
-                return _iceD_sendCommand(this, in, current);
+                return _iceD_receiveCommand(this, in, current);
             }
         }
 
