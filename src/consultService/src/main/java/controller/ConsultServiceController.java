@@ -1,13 +1,15 @@
 package controller;
 
+import com.zeroc.Ice.Communicator;
+
 import services.VotingLocationService;
 
 public class ConsultServiceController {
 
   private VotingLocationService votingLocationService;
 
-  public ConsultServiceController() {
-    votingLocationService = new VotingLocationService();
+  public ConsultServiceController(Communicator comm) {
+    votingLocationService = new VotingLocationService(comm);
   }
 
   public String getVotingLocation(String voterId) {
