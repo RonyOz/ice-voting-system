@@ -8,6 +8,7 @@ dependencies{
     implementation 'io.freefair.lombok:io.freefair.lombok.gradle.plugin:8.13.1'
 
     implementation 'com.zeroc:icegrid:3.7.10'
+    implementation 'com.zeroc:icestorm:3.7.10'
 
     implementation project(':reliableMessaging')
 }

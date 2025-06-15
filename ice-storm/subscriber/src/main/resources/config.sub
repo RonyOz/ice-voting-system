@@ -1,0 +1,2 @@
+TopicManager.Proxy=DemoIceStorm/TopicManager:default -h localhost -p 10000
+Clock.Subscriber.Endpoints=tcp

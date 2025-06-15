@@ -1,0 +1,2 @@
+Ice.Admin.InstanceName=icebox
+IceBox.Service.IceStorm=IceStormService,37:"C:/Program Files/ZeroC/Ice-3.7.10/bin/icegridnode.exe" --Ice.Config=config.service

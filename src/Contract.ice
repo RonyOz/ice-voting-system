@@ -31,4 +31,8 @@ module Contract { //Name of the folder where it will be compiled
         string getResults();
     }
     
+    interface ControlCommand {
+        void receiveCommand(string command);
+    };
+    
 }
