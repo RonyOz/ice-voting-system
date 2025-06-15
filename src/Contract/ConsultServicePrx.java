@@ -167,6 +167,80 @@ public interface ConsultServicePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
+    default String getResumeCSV()
+    {
+        return getResumeCSV(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default String getResumeCSV(java.util.Map<String, String> context)
+    {
+        return _iceI_getResumeCSVAsync(context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> getResumeCSVAsync()
+    {
+        return _iceI_getResumeCSVAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> getResumeCSVAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_getResumeCSVAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_getResumeCSVAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getResumeCSV", null, sync, null);
+        f.invoke(true, context, null, null, istr -> {
+                     String ret;
+                     ret = istr.readString();
+                     return ret;
+                 });
+        return f;
+    }
+
+    default String getPartialCSV()
+    {
+        return getPartialCSV(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default String getPartialCSV(java.util.Map<String, String> context)
+    {
+        return _iceI_getPartialCSVAsync(context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> getPartialCSVAsync()
+    {
+        return _iceI_getPartialCSVAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> getPartialCSVAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_getPartialCSVAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_getPartialCSVAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getPartialCSV", null, sync, null);
+        f.invoke(true, context, null, null, istr -> {
+                     String ret;
+                     ret = istr.readString();
+                     return ret;
+                 });
+        return f;
+    }
+
     /**
      * Contacts the remote server to verify that the object implements this type.
      * Raises a local exception if a communication error occurs.
