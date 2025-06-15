@@ -60,3 +60,5 @@ ehthumbs.db
 .factorproject
 .settings/
 .factorypath
+*.out
+*.mdb
