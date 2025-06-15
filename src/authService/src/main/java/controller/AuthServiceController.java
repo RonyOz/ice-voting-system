@@ -1,17 +1,31 @@
 package controller;
 import interfaces.IAuthServiceController;
+import repository.AuthRepository;
+import repository.DBConnection;
+import com.zeroc.Ice.Communicator;
 
 public class AuthServiceController implements IAuthServiceController {
 
+    private final AuthRepository authRepository;
 
-    //TODO: Hay que colocar con la conexion a redis, deptronto se pue hacer una carpeta repository para las conexiones a la base de datos y eso
-    public AuthServiceController() {
+    public AuthServiceController(Communicator communicator) {
+        try {
+            this.authRepository = new AuthRepository(DBConnection.getInstance(communicator).connect());
+        } catch (Exception e) {
+            throw new RuntimeException("[ERROR] No se pudo inicializar AuthRepository: " + e.getMessage(), e);
+        }
     }
 
-    // aqui debe implementarse la logica : Retorna 0 si puede votar; 1 si no es su mesa; 2 si está tratando de votar por segunda vez; 3 si no aparece en toda la bd
     @Override
     public int authenticate(String voterId, String tableId) {
         System.out.println("[INFO] [AUTHENTICATE]: " + voterId + " " + tableId);
-        return 0;
+        Boolean haVotado = authRepository.hasVoted(voterId);
+        if (haVotado == null) {
+            return 3; // no existe el ciudadano
+        } else if (!haVotado) {
+            return 0; // puede votar
+        } else {
+            return 2; // ya votó
+        }
     }
 }
