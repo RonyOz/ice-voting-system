@@ -157,5 +157,5 @@ public class Candidate implements java.lang.Cloneable,
     private static final Candidate _nullMarshalValue = new Candidate();
 
     /** @hidden */
-    public static final long serialVersionUID = -1267127688559004461L;
+    public static final long serialVersionUID = -1369377581L;
 }
