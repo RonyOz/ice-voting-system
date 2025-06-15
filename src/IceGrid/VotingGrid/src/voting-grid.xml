@@ -2,7 +2,7 @@
 
   <application name="ice-voting-system">
 
-    <node name="node1">
+    <node name="votin-node1">
       <server id="VotingService" exe="java" activation="on-demand">
         <option>-jar</option>
         <option>../../votingService/build/libs/votingService.jar</option>

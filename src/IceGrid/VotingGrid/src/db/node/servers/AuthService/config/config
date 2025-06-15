@@ -1,0 +1,18 @@
+# Configuration file (06/15/25 00:45:47.599)
+
+# Server configuration
+Ice.Admin.ServerId=AuthService
+Ice.Admin.Endpoints=tcp -h localhost
+Ice.ProgramName=AuthService
+# Object adapter AuthServiceAdapter
+AuthServiceAdapter.Endpoints=tcp -h localhost
+AuthServiceAdapter.AdapterId=AuthService.AuthServiceAdapter
+# Server descriptor properties
+Identity=AuthService
+IceMX.Metrics.Debug.GroupBy=id
+IceMX.Metrics.Debug.Disabled=1
+IceMX.Metrics.ByParent.GroupBy=parent
+IceMX.Metrics.ByParent.Disabled=1
+Ice.StdErr=db/AuthService.out
+Ice.StdOut=db/AuthService.out
+Ice.Default.Locator=IceVotingSystem/Locator:default -h localhost -p 4061
