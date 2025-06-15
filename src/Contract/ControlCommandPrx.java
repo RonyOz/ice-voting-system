@@ -17,38 +17,38 @@ package Contract;
 
 public interface ControlCommandPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void sendCommand(String message)
+    default void receiveCommand(String command)
     {
-        sendCommand(message, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        receiveCommand(command, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void sendCommand(String message, java.util.Map<String, String> context)
+    default void receiveCommand(String command, java.util.Map<String, String> context)
     {
-        _iceI_sendCommandAsync(message, context, true).waitForResponse();
+        _iceI_receiveCommandAsync(command, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> sendCommandAsync(String message)
+    default java.util.concurrent.CompletableFuture<Void> receiveCommandAsync(String command)
     {
-        return _iceI_sendCommandAsync(message, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_receiveCommandAsync(command, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> sendCommandAsync(String message, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> receiveCommandAsync(String command, java.util.Map<String, String> context)
     {
-        return _iceI_sendCommandAsync(message, context, false);
+        return _iceI_receiveCommandAsync(command, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_message -
+     * @param iceP_command -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_sendCommandAsync(String iceP_message, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_receiveCommandAsync(String iceP_command, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "sendCommand", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "receiveCommand", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     ostr.writeString(iceP_message);
+                     ostr.writeString(iceP_command);
                  }, null);
         return f;
     }

@@ -26,7 +26,7 @@ module Contract { //Name of the folder where it will be compiled
 
     interface ConsultService {
         string getVotingLocation(string voterId);
-        CandidateSeq setCandidates();
+        void setCandidates(CandidateSeq candidates);
         CandidateSeq getCandidates();
         string getResults();
     }

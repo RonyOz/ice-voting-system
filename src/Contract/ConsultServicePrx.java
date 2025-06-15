@@ -57,40 +57,39 @@ public interface ConsultServicePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default Candidate[] setCandidates()
+    default void setCandidates(Candidate[] candidates)
     {
-        return setCandidates(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setCandidates(candidates, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default Candidate[] setCandidates(java.util.Map<String, String> context)
+    default void setCandidates(Candidate[] candidates, java.util.Map<String, String> context)
     {
-        return _iceI_setCandidatesAsync(context, true).waitForResponse();
+        _iceI_setCandidatesAsync(candidates, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Candidate[]> setCandidatesAsync()
+    default java.util.concurrent.CompletableFuture<Void> setCandidatesAsync(Candidate[] candidates)
     {
-        return _iceI_setCandidatesAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setCandidatesAsync(candidates, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Candidate[]> setCandidatesAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setCandidatesAsync(Candidate[] candidates, java.util.Map<String, String> context)
     {
-        return _iceI_setCandidatesAsync(context, false);
+        return _iceI_setCandidatesAsync(candidates, context, false);
     }
 
     /**
      * @hidden
+     * @param iceP_candidates -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Candidate[]> _iceI_setCandidatesAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setCandidatesAsync(Candidate[] iceP_candidates, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Candidate[]> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setCandidates", null, sync, null);
-        f.invoke(true, context, null, null, istr -> {
-                     Candidate[] ret;
-                     ret = CandidateSeqHelper.read(istr);
-                     return ret;
-                 });
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setCandidates", null, sync, null);
+        f.invoke(false, context, null, ostr -> {
+                     CandidateSeqHelper.write(ostr, iceP_candidates);
+                 }, null);
         return f;
     }
 

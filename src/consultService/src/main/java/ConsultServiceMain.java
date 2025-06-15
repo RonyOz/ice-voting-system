@@ -3,7 +3,7 @@ import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
 import controller.ConsultServiceController;
-import impl.ConsultServiceImpl;
+import communication.ConsultServiceImpl;
 
 public class ConsultServiceMain {
 
@@ -21,11 +21,16 @@ public class ConsultServiceMain {
       System.out.println("[INFO] Consult Service is running");
 
       // FOR TESTING ===
-      ConsultServiceController controller = new ConsultServiceController();
+      ConsultServiceController controller = new ConsultServiceController(communicator);
+
       long startTime = System.currentTimeMillis();
+
       System.out.println(controller.getVotingLocation("711674049"));
+
       long endTime = System.currentTimeMillis();
+
       double duration = (double) (endTime - startTime);
+
       System.out.println("Duration: " + duration);
 
       communicator.waitForShutdown();

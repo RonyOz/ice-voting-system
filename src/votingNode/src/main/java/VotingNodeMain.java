@@ -10,7 +10,7 @@ import com.zeroc.Ice.ObjectAdapter;
 
 import java.util.Scanner;
 
-public class VotingNode {
+public class VotingNodeMain {
   public static void main(String[] args) {
 
     Scanner scanner = new Scanner(System.in);

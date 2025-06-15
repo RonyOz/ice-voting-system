@@ -19,7 +19,7 @@ public interface ConsultService extends com.zeroc.Ice.Object
 {
     String getVotingLocation(String voterId, com.zeroc.Ice.Current current);
 
-    Candidate[] setCandidates(com.zeroc.Ice.Current current);
+    void setCandidates(Candidate[] candidates, com.zeroc.Ice.Current current);
 
     Candidate[] getCandidates(com.zeroc.Ice.Current current);
 
@@ -80,12 +80,12 @@ public interface ConsultService extends com.zeroc.Ice.Object
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setCandidates(ConsultService obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        inS.readEmptyParams();
-        Candidate[] ret = obj.setCandidates(current);
-        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        CandidateSeqHelper.write(ostr, ret);
-        inS.endWriteParams(ostr);
-        return inS.setResult(ostr);
+        com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        Candidate[] iceP_candidates;
+        iceP_candidates = CandidateSeqHelper.read(istr);
+        inS.endReadParams();
+        obj.setCandidates(iceP_candidates, current);
+        return inS.setResult(inS.writeEmptyParams());
     }
 
     /**
