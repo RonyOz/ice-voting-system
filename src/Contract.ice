@@ -29,6 +29,8 @@ module Contract { //Name of the folder where it will be compiled
         void setCandidates(CandidateSeq candidates);
         CandidateSeq getCandidates();
         string getResults();
+        string getResumeCSV();
+        string getPartialCSV();
     }
     
     interface ControlCommand {
