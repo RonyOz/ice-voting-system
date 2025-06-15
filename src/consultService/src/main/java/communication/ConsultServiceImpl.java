@@ -31,4 +31,14 @@ public class ConsultServiceImpl implements ConsultService {
     throw new UnsupportedOperationException("Unimplemented method 'getResults'");
   }
 
+  @Override
+  public String getResumeCSV(Current current) {
+    return "Resume CSV data"; // Placeholder for actual implementation
+  }
+
+  @Override
+  public String getPartialCSV(Current current) {
+    return "Partial CSV data"; // Placeholder for actual implementation
+  }
+
 }

@@ -14,6 +14,7 @@ public class ConsultServiceController {
   }
 
   public String getVotingLocation(String voterId) {
+    // TODO: Single point of failure
     return votingLocationService.findVotingLocation(voterId);
   }
 
@@ -22,6 +23,7 @@ public class ConsultServiceController {
   }
 
   public Candidate[] getCandidates() {
+    // TODO: Single point of failure - Proxy Cache
     return votingLocationService.getCandidates();
   }
 
