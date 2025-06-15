@@ -67,18 +67,8 @@ public class DatabaseConnector {
   }
 
   public VotingLocationDTO findVotingLocation(String voterId) {
-    String sql = "SELECT " +
-        "    p.nombre AS nombre_puesto, " +
-        "    p.direccion, " +
-        "    m.nombre AS ciudad, " +
-        "    d.nombre AS departamento, " +
-        "    mv.consecutive AS numero_mesa " +
-        "FROM ciudadano c " +
-        "JOIN mesa_votacion mv ON c.mesa_id = mv.id " +
-        "JOIN puesto_votacion p ON mv.puesto_id = p.id " +
-        "JOIN municipio m ON p.municipio_id = m.id " +
-        "JOIN departamento d ON m.departamento_id = d.id " +
-        "WHERE c.documento = ?;";
+    String sql = "SELECT * " +
+        "FROM ciudadano_vista_lookup WHERE documento = ? ;";
 
     try (
         Connection conn = connect();
