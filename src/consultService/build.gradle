@@ -4,6 +4,11 @@ slice {
     }
 }
 
+dependencies {
+  implementation("com.zaxxer:HikariCP:2.3.2")
+implementation("org.postgresql:postgresql:42.7.4")
+}
+
 jar {
         manifest {
             attributes(

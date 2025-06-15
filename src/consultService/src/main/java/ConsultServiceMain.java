@@ -2,31 +2,38 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 
+import controller.ConsultServiceController;
+import impl.ConsultServiceImpl;
 
 public class ConsultServiceMain {
-        public static void main(String[] args) {
 
-        try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
-            ObjectAdapter adapter = communicator.createObjectAdapter("consultServices");
+  public static void main(String[] args) {
 
-            // DBConnection dbConnection = new DBConnection(communicator);
-            // dbConnection.connectDB();
+    try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
 
-            // VotingServiceController controller = new VotingServiceController(new JdbcVoteRepository(dbConnection.getConnection()));
-        
-            // VotingServiceImpl votingService = new VotingServiceImpl(controller);
+      ObjectAdapter adapter = communicator.createObjectAdapter("ConsultService");
 
-            // adapter.add(votingService, Util.stringToIdentity("votingService"));
-            // adapter.activate();
+      ConsultServiceImpl consultService = new ConsultServiceImpl();
 
-            System.out.println("[INFO] Consult Service is running");
+      // IDK if the namming being the same as the adapter matters
+      adapter.add(consultService, Util.stringToIdentity("ConsultService"));
 
-            communicator.waitForShutdown();
+      System.out.println("[INFO] Consult Service is running");
 
-        } catch (Exception e) {
-            System.err.println("[ERROR] Error initializing communicator: " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
+      // FOR TESTING ===
+      ConsultServiceController controller = new ConsultServiceController();
+      long startTime = System.currentTimeMillis();
+      System.out.println(controller.getVotingLocation("711674049"));
+      long endTime = System.currentTimeMillis();
+      double duration = (double) (endTime - startTime);
+      System.out.println("Duration: " + duration);
+
+      communicator.waitForShutdown();
+
+    } catch (Exception e) {
+      System.err.println("[ERROR] Error initializing communicator: " + e.getMessage());
+      e.printStackTrace();
+      System.exit(1);
     }
+  }
 }
