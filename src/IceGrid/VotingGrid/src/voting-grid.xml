@@ -5,7 +5,7 @@
     <node name="votin-node1">
       <server id="VotingService" exe="java" activation="on-demand">
         <option>-jar</option>
-        <option>../../votingService/build/libs/votingService.jar</option>
+        <option>../../../votingService/build/libs/votingService.jar</option>
         <adapter name="votingServices" endpoints="tcp -h localhost">
           <object identity="votingService" type="::Contract::VotingService" property="Identity"/>
         </adapter>
@@ -18,7 +18,7 @@
 
       <server id="AuthService" exe="java" activation="on-demand">
         <option>-jar</option>
-        <option>../../authService/build/libs/authService.jar</option>
+        <option>../../../authService/build/libs/authService.jar</option>
         <adapter name="AuthServiceAdapter" endpoints="tcp -h localhost">
           <object identity="AuthService" type="::Contract::AuthService" property="Identity"/>
         </adapter>
