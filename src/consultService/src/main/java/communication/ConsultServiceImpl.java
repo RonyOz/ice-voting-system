@@ -14,17 +14,15 @@ public class ConsultServiceImpl implements ConsultService {
   public String getVotingLocation(String voterId, Current current) {
     return consultServiceController.getVotingLocation(voterId);
   }
-
+  
   @Override
-  public Candidate[] setCandidates(Current current) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setCandidates'");
+  public void setCandidates(Candidate[] candidates, Current current) {
+    consultServiceController.setCandidates(candidates);
   }
 
   @Override
   public Candidate[] getCandidates(Current current) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getCandidates'");
+    return consultServiceController.getCandidates();
   }
 
   @Override
