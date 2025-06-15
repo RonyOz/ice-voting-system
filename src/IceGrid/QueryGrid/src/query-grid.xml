@@ -12,6 +12,14 @@
         <property name="IceMX.Metrics.ByParent.GroupBy" value="parent"/>
         <property name="IceMX.Metrics.ByParent.Disabled" value="1"/>
       </server>
+
+      <server id="ProxyCache" exe="java" activation="on-demand">
+        <option>-jar</option>
+        <option>../../../proxyCache/build/libs/proxyCache.jar</option>
+        <adapter name="ProxyCacheAdapter" endpoints="tcp -h localhost">
+          <object identity="ProxyCache" type="::Contract::ConsultService"/>
+        </adapter>
+      </server>
     </node>
   </application>
 </icegrid>
