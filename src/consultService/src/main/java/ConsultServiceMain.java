@@ -10,9 +10,8 @@ public class ConsultServiceMain {
 
   public static void main(String[] args) {
 
-    java.util.List<String> extraArgs = new java.util.ArrayList<String>();
+    try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
 
-    try (Communicator communicator = Util.initialize(args, extraArgs)) {
       communicator.getProperties().setProperty("Ice.Default.Package", "com.zeroc.demos.IceGrid.simple");
 
       ObjectAdapter adapter = communicator.createObjectAdapter("ConsultServiceAdapter");
