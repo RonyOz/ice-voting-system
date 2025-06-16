@@ -31,7 +31,6 @@ public class ConsultServiceMain {
 
       // Imprimir resultados al iniciar
       System.out.println("\n=== CONSULTANDO RESULTADOS DE VOTACIÓN ===");
-      String results = consultService.getResults(null);
       System.out.println("\n=== FIN DE RESULTADOS ===\n");
 
       communicator.waitForShutdown();
