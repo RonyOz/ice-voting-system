@@ -4,7 +4,7 @@
       <server id="ConsultService" exe="java" activation="on-demand">
         <option>-jar</option>
         <option>../../../consultService/build/libs/consultService.jar</option>
-        <adapter name="ConsultService" endpoints="tcp -h localhost">
+        <adapter name="ConsultServiceAdapter" endpoints="tcp -h localhost">
           <object identity="ConsultService" type="::Contract::ConsultService" property="Identity"/>
         </adapter>
         <property name="IceMX.Metrics.Debug.GroupBy" value="id"/>
@@ -17,7 +17,7 @@
         <option>-jar</option>
         <option>../../../proxyCache/build/libs/proxyCache.jar</option>
         <adapter name="ProxyCacheAdapter" endpoints="tcp -h localhost">
-          <object identity="ProxyCache" type="::Contract::ConsultService"/>
+          <object identity="ProxyCache" type="::Contract::ConsultService" property="Identity"/>
         </adapter>
       </server>
     </node>

@@ -1,5 +1,7 @@
 import com.zeroc.Ice.Communicator;
+import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
+import com.zeroc.Ice.Properties;
 import com.zeroc.Ice.Util;
 
 import controller.ConsultServiceController;
@@ -9,14 +11,20 @@ public class ConsultServiceMain {
 
   public static void main(String[] args) {
 
-    try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
+    java.util.List<String> extraArgs = new java.util.ArrayList<String>();
 
-      ObjectAdapter adapter = communicator.createObjectAdapter("ConsultService");
+    try (Communicator communicator = Util.initialize(args, extraArgs)) {
+      communicator.getProperties().setProperty("Ice.Default.Package", "com.zeroc.demos.IceGrid.simple");
+
+      ObjectAdapter adapter = communicator.createObjectAdapter("ConsultServiceAdapter");
+
+      Properties properties = communicator.getProperties();
+      Identity id = com.zeroc.Ice.Util.stringToIdentity(properties.getProperty("Identity"));
 
       ConsultServiceImpl consultService = new ConsultServiceImpl();
 
       // IDK if the namming being the same as the adapter matters
-      adapter.add(consultService, Util.stringToIdentity("ConsultService"));
+      adapter.add(consultService, id);
 
       System.out.println("[INFO] Consult Service is running");
 
