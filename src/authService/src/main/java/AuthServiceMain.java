@@ -11,12 +11,7 @@ public class AuthServiceMain {
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
             ObjectAdapter adapter = communicator.createObjectAdapter("AuthServiceAdapter");
 
-            // TODO: Reemplazar con la conexion a Redis
-            // DBConnection dbConnection = new DBConnection(communicator);
-            // dbConnection.connectDB();
-
-            AuthServiceController controller = new AuthServiceController();
-        
+            AuthServiceController controller = new AuthServiceController(communicator);
             AuthServiceImpl authService = new AuthServiceImpl(controller);
 
             adapter.add(authService, Util.stringToIdentity("AuthService"));
@@ -24,9 +19,8 @@ public class AuthServiceMain {
 
             System.out.println("[INFO] Auth Service is running");
 
-            // Add shutdown hook to clean up resources
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                authService.shutdown();
+                // aqui se podra cerrar la conexion a la base de datos
             }));
 
             communicator.waitForShutdown();
