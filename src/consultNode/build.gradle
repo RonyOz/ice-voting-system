@@ -4,15 +4,22 @@ slice {
     }
 }
 
-dependencies{
+dependencies {
     implementation 'com.zeroc:icegrid:3.7.10'
+    implementation 'com.zeroc:ice:3.7.10'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
 }
 
 jar {
-        manifest {
-            attributes(
-                "Main-Class": project.name.capitalize()+"Main",
-                "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
-            )
-        }
+    manifest {
+        attributes(
+            "Main-Class": project.name.capitalize()+"Main",
+            "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
+        )
     }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

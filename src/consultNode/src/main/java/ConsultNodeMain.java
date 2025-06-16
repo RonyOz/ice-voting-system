@@ -1,15 +1,12 @@
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Util;
-
 import com.zeroc.IceGrid.QueryPrx;
-
 import Contract.ConsultServicePrx;
-
 import java.util.Scanner;
 
 public class ConsultNodeMain {
   public static void main(String[] args) {
-
+    System.out.println("Iniciando ConsultNode...");
     Scanner scanner = new Scanner(System.in);
 
     try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
@@ -46,8 +43,9 @@ public class ConsultNodeMain {
     } catch (Exception e) {
       System.err.println("Error de conexión con Ice: " + e.getMessage());
       e.printStackTrace();
+    } finally {
+      scanner.close();
+      System.out.println("Programa finalizado");
     }
-
-    scanner.close();
   }
 }

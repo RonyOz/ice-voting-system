@@ -2,11 +2,11 @@
 
   <application name="ice-voting-system">
 
-    <node name="votin-node1">
+    <node name="voting-node1">
       <server id="VotingService" exe="java" activation="on-demand">
         <option>-jar</option>
         <option>../../../votingService/build/libs/votingService.jar</option>
-        <adapter name="votingServices" endpoints="tcp -h localhost">
+        <adapter name="votingServiceAdapter" endpoints="tcp -h localhost">
           <object identity="votingService" type="::Contract::VotingService" property="Identity"/>
         </adapter>
 

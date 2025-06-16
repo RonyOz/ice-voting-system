@@ -27,6 +27,7 @@ public class VotingSiteController implements IVotingSiteController {
   public void processVote(Vote vote, String votingNodeID) {
     if (authServicePrx.authenticate(vote.voterId, votingNodeID) == 0) {
       voteBatcher.addTask(vote);
+      System.out.println("[INFO] [AUTH] Vote from " + vote.voterId + " authenticated successfully.");
     }
   }
 
@@ -52,7 +53,7 @@ public class VotingSiteController implements IVotingSiteController {
         votingSiteImpl.reportVoteBatch(voteBatch);
       }
     } catch (Exception e) {
-      System.err.println("[ERRRO] Failed to processing vote batch: " + e.getMessage());
+      System.err.println("[ERROR] Failed to processing vote batch: " + e.getMessage());
       e.printStackTrace();
     }
   }

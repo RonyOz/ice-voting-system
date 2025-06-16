@@ -26,7 +26,7 @@ IceGrid.Registry.Discovery.Interface=127.0.0.1
 #
 #First node for 1 PC, in this case it could be used for VotingService
 # For now i will deploy VotingService and AuthService on the same node
-IceGrid.Node.Name=votin-node1
+IceGrid.Node.Name=voting-node1
 IceGrid.Node.Endpoints=default -h localhost
 IceGrid.Node.Data=db/node
 
