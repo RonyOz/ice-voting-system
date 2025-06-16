@@ -46,7 +46,6 @@ public class VotingSiteMain {
     RMDestinationPrx dest = null;
     QueryPrx query = QueryPrx.checkedCast(communicator.stringToProxy("IceVotingSystem/Query"));
     dest = RMDestinationPrx.checkedCast(query.findObjectByType("::Contract::VotingService"));
-    System.out.println("[INFO] Voting Service Proxy: " + dest);
 
     RMSourcePrx rm = RMSourcePrx.checkedCast(communicator.propertyToProxy("RMSource.Proxy"));
     rm.setServerProxy(dest);
@@ -63,7 +62,7 @@ public class VotingSiteMain {
     com.zeroc.IceStorm.TopicManagerPrx manager = com.zeroc.IceStorm.TopicManagerPrx.checkedCast(
         communicator.propertyToProxy("TopicManager.Proxy"));
     if (manager == null) {
-      System.err.println("invalid proxy");
+      System.err.println("[ERROR] Invalid proxy");
       return 1;
     }
 
@@ -74,7 +73,7 @@ public class VotingSiteMain {
       try {
         topic = manager.create(topicName);
       } catch (com.zeroc.IceStorm.TopicExists ex) {
-        System.err.println("temporary failure, try again.");
+        System.err.println("[ERROR] [ICESTORM] Temporary failure, try again.");
         return 1;
       }
     }
@@ -90,7 +89,7 @@ public class VotingSiteMain {
     try {
       topic.subscribeAndGetPublisher(qos, subscriber);
     } catch (com.zeroc.IceStorm.AlreadySubscribed e) {
-      System.out.println("reactivating persistent subscriber");
+      System.out.println("[INFO] [ICESTORM] Reactivating persistent subscriber");
     } catch (com.zeroc.IceStorm.InvalidSubscriber e) {
       e.printStackTrace();
       return 1;
@@ -111,7 +110,6 @@ public class VotingSiteMain {
     Runtime.getRuntime().removeShutdownHook(destroyHook);
 
     System.out.println("[INFO] Voting Site is running");
-    System.out.println("[INFO] Ice Storm subscriber is active");
     communicator.waitForShutdown();
 
     return 0;
