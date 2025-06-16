@@ -14,7 +14,7 @@ public class AuthServiceMain {
             AuthServiceController controller = new AuthServiceController(communicator);
             AuthServiceImpl authService = new AuthServiceImpl(controller);
 
-            adapter.add(authService, Util.stringToIdentity("default"));
+            adapter.add(authService, Util.stringToIdentity("AuthService"));
             adapter.activate();
 
             System.out.println("[INFO] Auth Service is running");
