@@ -1,5 +1,7 @@
 import com.zeroc.Ice.Communicator;
+import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
+import com.zeroc.Ice.Properties;
 import com.zeroc.Ice.Util;
 import controller.VotingServiceController;
 import repository.DBConnection;
@@ -9,6 +11,10 @@ public class VotingServiceMain {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
             ObjectAdapter adapter = communicator.createObjectAdapter("votingServiceAdapter");
+            communicator.getProperties().setProperty("Ice.Default.Package", "com.zeroc.demos.IceGrid.simple");
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> communicator.destroy()));
+            Properties properties = communicator.getProperties();
+            Identity identity = Util.stringToIdentity(properties.getProperty("Identity"));
 
             DBConnection dbConnection = new DBConnection(communicator);
             dbConnection.connectDB();
@@ -17,7 +23,7 @@ public class VotingServiceMain {
         
             VotingServiceImpl votingService = new VotingServiceImpl(controller);
 
-            adapter.add(votingService, Util.stringToIdentity("votingService"));
+            adapter.add(votingService, identity);
             adapter.activate();
 
             System.out.println("[INFO] Voting Service is running");

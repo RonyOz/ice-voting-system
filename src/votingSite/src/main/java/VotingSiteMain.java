@@ -46,6 +46,7 @@ public class VotingSiteMain {
     RMDestinationPrx dest = null;
     QueryPrx query = QueryPrx.checkedCast(communicator.stringToProxy("IceVotingSystem/Query"));
     dest = RMDestinationPrx.checkedCast(query.findObjectByType("::Contract::VotingService"));
+    System.out.println("[INFO] Voting Service Proxy: " + dest);
 
     RMSourcePrx rm = RMSourcePrx.checkedCast(communicator.propertyToProxy("RMSource.Proxy"));
     rm.setServerProxy(dest);
