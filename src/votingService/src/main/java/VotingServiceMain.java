@@ -1,7 +1,6 @@
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
-
 import controller.VotingServiceController;
 import repository.DBConnection;
 import repository.JdbcVoteRepository;
@@ -9,7 +8,7 @@ public class VotingServiceMain {
     public static void main(String[] args) {
 
         try(Communicator communicator = Util.initialize(args, "properties.cfg")) {
-            ObjectAdapter adapter = communicator.createObjectAdapter("votingServices");
+            ObjectAdapter adapter = communicator.createObjectAdapter("votingServiceAdapter");
 
             DBConnection dbConnection = new DBConnection(communicator);
             dbConnection.connectDB();
