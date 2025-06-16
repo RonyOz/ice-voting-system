@@ -1,7 +1,3 @@
-import com.zeroc.Ice.*;
-import com.zeroc.IceStorm.*;
-
-import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 import com.zeroc.IceGrid.QueryPrx;
