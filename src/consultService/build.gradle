@@ -7,9 +7,6 @@ slice {
 dependencies {
   implementation("com.zaxxer:HikariCP:2.3.2")
   implementation("org.postgresql:postgresql:42.7.4")
-  implementation('org.javassist:javassist:3.29.2-GA')
-  implementation('org.slf4j:slf4j-api:1.7.36')
-  implementation('org.slf4j:slf4j-simple:1.7.36')
 }
 
 jar {

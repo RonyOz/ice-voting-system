@@ -11,3 +11,6 @@ db/node/
 db/registry/
 
 *.mdb
+
+IceGrid/VotingGrid/src/db/node/*
+IceGrid/VotingGrid/src/db/registry/*
