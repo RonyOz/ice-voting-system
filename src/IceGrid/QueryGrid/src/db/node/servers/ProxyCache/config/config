@@ -1,0 +1,14 @@
+# Configuration file (06/15/25 21:37:16.567)
+
+# Server configuration
+Ice.Admin.ServerId=ProxyCache
+Ice.Admin.Endpoints=tcp -h localhost
+Ice.ProgramName=ProxyCache
+# Object adapter ProxyCacheAdapter
+ProxyCacheAdapter.Endpoints=tcp -h localhost
+ProxyCacheAdapter.AdapterId=ProxyCache.ProxyCacheAdapter
+# Server descriptor properties
+Identity=ProxyCache
+Ice.StdErr=db/ProxyCache.out
+Ice.StdOut=db/ProxyCache.out
+Ice.Default.Locator=IceQuerySystem/Locator:default -h localhost -p 4062
