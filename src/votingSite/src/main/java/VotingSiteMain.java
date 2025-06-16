@@ -1,3 +1,4 @@
+import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
 import com.zeroc.IceGrid.QueryPrx;
