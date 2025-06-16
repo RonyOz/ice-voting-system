@@ -19,4 +19,10 @@ jar {
                 "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
             )
         }
+        
+        // Copiar el archivo de propiedades a la carpeta config
+        from('src/main/resources') {
+            include '*.cfg'
+            into 'config'
+        }
     }

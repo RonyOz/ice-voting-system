@@ -44,15 +44,15 @@ public class LocationRepository implements ILocationRepository {
 
     @Override
     public Candidate[] findAllCandidates() {
-        String sql = "SELECT * FROM candidates";
+        String sql = "SELECT candidate_id, nombre FROM candidatos";
         
         try (PreparedStatement stmt = dbConnection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             List<Candidate> candidates = new ArrayList<>();
             while (rs.next()) {
-                String id = rs.getString("id");
-                String name = rs.getString("name");
+                String id = rs.getString("candidate_id");
+                String name = rs.getString("nombre");
                 candidates.add(new Candidate(id, name));
             }
             return candidates.toArray(new Candidate[0]);
@@ -66,19 +66,19 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public void setCandidates(Candidate[] candidates) {
         // Clean table before inserting new candidates
-        String deleteSql = "DELETE FROM candidates";
+        String deleteSql = "DELETE FROM candidatos";
         try (PreparedStatement deleteStmt = dbConnection.prepareStatement(deleteSql)) {
             deleteStmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("[ERROR] Failed to clear candidates table: " + e.getMessage());
         }
 
-        String sql = "INSERT INTO candidates (id, name) VALUES (?, ?)";
+        String sql = "INSERT INTO candidatos (candidate_id, nombre) VALUES (?, ?)";
 
         try (PreparedStatement stmt = dbConnection.prepareStatement(sql)) {
             for (Candidate candidate : candidates) {
                 stmt.setString(1, candidate.candidateId);
-                stmt.setString(2, candidate.candidateId);
+                stmt.setString(2, candidate.name);
                 stmt.addBatch();
             }
             stmt.executeBatch();

@@ -9,12 +9,9 @@ import communication.ConsultServiceImpl;
 public class ConsultServiceMain {
 
   public static void main(String[] args) {
-
     java.util.List<String> extraArgs = new java.util.ArrayList<String>();
 
-    try (Communicator communicator = Util.initialize(args, extraArgs)) {
-      communicator.getProperties().setProperty("Ice.Default.Package", "com.zeroc.demos.IceGrid.simple");
-
+    try (Communicator communicator = Util.initialize(args, "config/properties.cfg", extraArgs)) {
       ObjectAdapter adapter = communicator.createObjectAdapter("ConsultServiceAdapter");
 
       Properties properties = communicator.getProperties();
@@ -22,18 +19,19 @@ public class ConsultServiceMain {
 
       ConsultServiceImpl consultService = new ConsultServiceImpl(communicator);
 
-      // IDK if the namming being the same as the adapter matters
       adapter.add(consultService, id);
-
-      // Activar el adaptador
       adapter.activate();
 
       System.out.println("[INFO] Consult Service is running");
-      System.out.println("[INFO] Endpoint: " + adapter.getEndpoints()[0].toString());
 
-      // probar con el 711674049
+      // id de ejemplo 711674049
+      System.out.println("[INFO] Endpoint: " + adapter.getEndpoints()[0]);
 
-      // Esperar por shutdown
+      // Imprimir resultados al iniciar
+      System.out.println("\n=== CONSULTANDO RESULTADOS DE VOTACIÓN ===");
+      String results = consultService.getResults(null);
+      System.out.println("\n=== FIN DE RESULTADOS ===\n");
+
       communicator.waitForShutdown();
 
     } catch (Exception e) {
