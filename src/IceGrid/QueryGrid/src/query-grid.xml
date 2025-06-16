@@ -2,6 +2,10 @@
   <application name="ice-query-system">
     <node name="query-node1">
       <server id="ConsultService" exe="java" activation="on-demand">
+        <option>--add-opens</option>
+        <option>java.base/java.lang=ALL-UNNAMED</option>
+        <option>--add-opens</option>
+        <option>java.base/java.lang.reflect=ALL-UNNAMED</option>
         <option>-jar</option>
         <option>../../../consultService/build/libs/consultService.jar</option>
         <adapter name="ConsultService" endpoints="tcp -h localhost">
@@ -11,6 +15,14 @@
         <property name="IceMX.Metrics.Debug.Disabled" value="1"/>
         <property name="IceMX.Metrics.ByParent.GroupBy" value="parent"/>
         <property name="IceMX.Metrics.ByParent.Disabled" value="1"/>
+      </server>
+
+      <server id="ProxyCache" exe="java" activation="on-demand">
+        <option>-jar</option>
+        <option>../../../proxyCache/build/libs/proxyCache.jar</option>
+        <adapter name="ProxyCacheAdapter" endpoints="tcp -h localhost">
+          <object identity="ProxyCache" type="::Contract::ConsultService"/>
+        </adapter>
       </server>
     </node>
   </application>

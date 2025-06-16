@@ -1,5 +1,6 @@
 package communication;
 
+import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Current;
 
 import Contract.Candidate;
@@ -9,6 +10,10 @@ import controller.ConsultServiceController;
 public class ConsultServiceImpl implements ConsultService {
 
   private ConsultServiceController consultServiceController;
+
+  public ConsultServiceImpl(Communicator communicator) {
+    this.consultServiceController = new ConsultServiceController(communicator);
+  }
 
   @Override
   public String getVotingLocation(String voterId, Current current) {
