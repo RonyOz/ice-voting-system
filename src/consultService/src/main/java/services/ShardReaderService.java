@@ -3,7 +3,6 @@ package services;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -20,14 +19,14 @@ public class ShardReaderService {
         this.readerPool = Executors.newFixedThreadPool(poolSize);
     }
 
-    public List<Future<Map<String, Integer>>> fetchPartialResults(List<String> mesaIds) {
-        List<Future<Map<String, Integer>>> tasks = new ArrayList<>();
+    public List<Future<List<VoteRepository.CandidateVoteResult>>> fetchPartialResults(List<String> mesaIds) {
+        List<Future<List<VoteRepository.CandidateVoteResult>>> tasks = new ArrayList<>();
 
         for (String mesaId : mesaIds) {
             tasks.add(readerPool.submit(() -> {
                 try (Connection conn = dbConnection.connect()) {
                     VoteRepository repo = new VoteRepository(conn);
-                    return repo.countVotesByCandidate(mesaId);
+                    return repo.countVotesByCandidate();
                 }
             }));
         }
