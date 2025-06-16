@@ -61,7 +61,7 @@ public class ConsultNodeMain {
 
           long startTime = System.currentTimeMillis();
 
-          for (int i = 0; i < 2666; i++) {
+          for (int i = 0; i < 500; i++) {
             String documento = lines.get(i).trim();
             if (!documento.isEmpty()) {
               try {
