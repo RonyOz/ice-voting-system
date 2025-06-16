@@ -9,9 +9,11 @@ import communication.ConsultServiceImpl;
 public class ConsultServiceMain {
 
   public static void main(String[] args) {
-    java.util.List<String> extraArgs = new java.util.ArrayList<String>();
 
-    try (Communicator communicator = Util.initialize(args, "config/properties.cfg", extraArgs)) {
+    try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
+
+      communicator.getProperties().setProperty("Ice.Default.Package", "com.zeroc.demos.IceGrid.simple");
+
       ObjectAdapter adapter = communicator.createObjectAdapter("ConsultServiceAdapter");
 
       Properties properties = communicator.getProperties();
@@ -29,7 +31,6 @@ public class ConsultServiceMain {
 
       // Imprimir resultados al iniciar
       System.out.println("\n=== CONSULTANDO RESULTADOS DE VOTACIÓN ===");
-      String results = consultService.getResults(null);
       System.out.println("\n=== FIN DE RESULTADOS ===\n");
 
       communicator.waitForShutdown();

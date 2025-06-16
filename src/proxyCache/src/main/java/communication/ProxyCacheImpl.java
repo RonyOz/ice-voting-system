@@ -120,7 +120,6 @@ public class ProxyCacheImpl implements ConsultService {
 
   @Override
   public String getVotingLocation(String voterId, Current current) {
-    System.out.println("[INFO] GET VOTING LOCATION CALLED FROM CACHE PROXY");
     String cacheKey = generateCacheKey("getVotingLocation", new String[] { voterId });
     CacheEntry cached = cache.get(cacheKey);
 
