@@ -13,26 +13,20 @@ public class ConsultServiceMain {
 
       ObjectAdapter adapter = communicator.createObjectAdapter("ConsultService");
 
-      ConsultServiceImpl consultService = new ConsultServiceImpl();
+      ConsultServiceImpl consultService = new ConsultServiceImpl(communicator);
 
       // IDK if the namming being the same as the adapter matters
       adapter.add(consultService, Util.stringToIdentity("ConsultService"));
 
+      // Activar el adaptador
+      adapter.activate();
+
       System.out.println("[INFO] Consult Service is running");
+      System.out.println("[INFO] Endpoint: " + adapter.getEndpoints()[0].toString());
 
-      // FOR TESTING ===
-      ConsultServiceController controller = new ConsultServiceController(communicator);
+      // probar con el 711674049
 
-      long startTime = System.currentTimeMillis();
-
-      System.out.println(controller.getVotingLocation("711674049"));
-
-      long endTime = System.currentTimeMillis();
-
-      double duration = (double) (endTime - startTime);
-
-      System.out.println("Duration: " + duration);
-
+      // Esperar por shutdown
       communicator.waitForShutdown();
 
     } catch (Exception e) {
