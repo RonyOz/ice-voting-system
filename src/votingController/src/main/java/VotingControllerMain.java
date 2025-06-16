@@ -9,7 +9,7 @@ public class VotingControllerMain {
         int status = 0;
         java.util.List<String> extraArgs = new java.util.ArrayList<String>();
 
-        try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, "config.pub", extraArgs)) {
+        try (com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, "config.pub", extraArgs)) {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (votingThread != null) {
                     votingThread.interrupt();
@@ -26,8 +26,8 @@ public class VotingControllerMain {
         String topicName = "ControlCommandTopic";
 
         com.zeroc.IceStorm.TopicManagerPrx manager = com.zeroc.IceStorm.TopicManagerPrx.checkedCast(
-            communicator.propertyToProxy("TopicManager.Proxy"));
-        if(manager == null) {
+                communicator.propertyToProxy("TopicManager.Proxy"));
+        if (manager == null) {
             System.err.println("invalid proxy");
             return 1;
         }
@@ -35,10 +35,10 @@ public class VotingControllerMain {
         com.zeroc.IceStorm.TopicPrx topic;
         try {
             topic = manager.retrieve(topicName);
-        } catch(com.zeroc.IceStorm.NoSuchTopic e) {
+        } catch (com.zeroc.IceStorm.NoSuchTopic e) {
             try {
                 topic = manager.create(topicName);
-            } catch(com.zeroc.IceStorm.TopicExists ex) {
+            } catch (com.zeroc.IceStorm.TopicExists ex) {
                 System.err.println("temporary failure, try again.");
                 return 1;
             }
@@ -63,7 +63,7 @@ public class VotingControllerMain {
                         isVotingActive = true;
                         controlCommand.receiveCommand("START_VOTATION");
                         System.out.println("[SENT] START_VOTATION");
-                        
+
                         votingThread = new Thread(() -> {
                             while (isVotingActive) {
                                 try {
@@ -114,4 +114,4 @@ public class VotingControllerMain {
             }
         }
     }
-} 
+}
