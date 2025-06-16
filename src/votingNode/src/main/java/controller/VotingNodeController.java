@@ -21,7 +21,7 @@ public class VotingNodeController implements IVotingNodeController {
     Vote vote = new Vote(voterId, candidateId);
     votingSitePrx.sendVote(vote, mesaId);
 
-    System.out.println("[INFO] [VOTE SENDED]: " + voterId + " " + candidateId + " " + mesaId);
+    System.out.println("[INFO] Vote Sended - VOTERID " + voterId + " - CANDIDATEID" + candidateId + " - MESAID " + mesaId);
 
     return 0;
   }
