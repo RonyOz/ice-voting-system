@@ -17,19 +17,27 @@ public class VoteRepository implements IVoteRepository {
     @Override
     public boolean saveVote(Vote vote) {
         boolean success = false;
+        String insertSql = "INSERT INTO votes (voter_id, candidate_id) VALUES (?, ?)";
+        String updateSql = "UPDATE ciudadano SET ha_votado = 't' WHERE documento = ?";
 
-        String sql = "INSERT INTO votes (voter_id, candidate_id) VALUES (?, ?)";
-
-        try (var stmt = dbConnection.prepareStatement(sql)) {
-            stmt.setString(1, vote.voterId);
-            stmt.setString(2, vote.candidateId);
-            int rowsAffected = stmt.executeUpdate();
-            success = rowsAffected > 0;
+        try (var insertStmt = dbConnection.prepareStatement(insertSql)) {
+            insertStmt.setString(1, vote.voterId);
+            insertStmt.setString(2, vote.candidateId);
+            int rowsAffected = insertStmt.executeUpdate();
+            if (rowsAffected > 0) {
+                success = true;
+                try (var updateStmt = dbConnection.prepareStatement(updateSql)) {
+                    updateStmt.setString(1, vote.voterId);
+                    updateStmt.executeUpdate();
+                } catch (Exception e) {
+                    System.err.println("[WARN] [DB] No se pudo actualizar ha_votado: " + e.getMessage());
+                }
+            }
             System.out.println("[DEBUG] Vote saved: " + success);
         } catch (Exception e) {
             System.err.println("[ERROR] [DB] Failed to save vote: " + e.getMessage());
         }
-        
+
         return success;
     }
 
