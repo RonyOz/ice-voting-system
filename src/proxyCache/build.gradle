@@ -1,0 +1,18 @@
+slice {
+    java {
+        files = [file("../Contract.ice")]
+    }
+}
+
+dependencies{
+    implementation 'com.zeroc:icegrid:3.7.10'
+}
+
+jar {
+        manifest {
+            attributes(
+                "Main-Class": project.name.capitalize()+"Main",
+                "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
+            )
+        }
+    }
