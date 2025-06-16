@@ -12,7 +12,7 @@ import threads.RMJob;
 public class ReliableMessaging {
     
     public static void main(String[] args) {
-        Communicator communicator = Util.initialize(args, "rmservice.config");
+        Communicator communicator = Util.initialize(args, "rmservice.cfg");
 
         Notification notification = new Notification();
         RMJob job = new RMJob(notification);

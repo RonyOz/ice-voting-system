@@ -1,28 +1,28 @@
 package controller;
+
 import interfaces.IVotingNodeController;
 import Contract.Vote;
 import Contract.VotingSitePrx;
 
 public class VotingNodeController implements IVotingNodeController {
 
-    private final VotingSitePrx votingSitePrx;
+  private final VotingSitePrx votingSitePrx;
 
-    public VotingNodeController(VotingSitePrx votingSitePrx) {
-        this.votingSitePrx = votingSitePrx;
-    }
+  public VotingNodeController(VotingSitePrx votingSitePrx) {
+    this.votingSitePrx = votingSitePrx;
+  }
 
-    // aqui debe implementarse la logica : Retorna 0 si puede votar; 1 si no es su mesa; 2 si está tratando de votar por segunda vez; 3 si no aparece en toda la bd
+  @Override
+  public int vote(String voterId, String candidateId) {
 
-    @Override
-    public int vote(String voterId, String candidateId) {
+    // TODO: Ver donde se genera el mesaId
+    String mesaId = java.util.UUID.randomUUID().toString();
 
-        Vote vote = new Vote(voterId, candidateId);
-        votingSitePrx.sendVote(vote);
+    Vote vote = new Vote(voterId, candidateId);
+    votingSitePrx.sendVote(vote, mesaId);
 
-        String mesaId = java.util.UUID.randomUUID().toString();
-        
-        System.out.println("[INFO] [VOTE SENDED]: " + voterId + " " + candidateId + " " + mesaId);
+    System.out.println("[INFO] Vote Sended - VOTERID " + voterId + " - CANDIDATEID" + candidateId + " - MESAID " + mesaId);
 
-        return 0;
-    }
+    return 0;
+  }
 }

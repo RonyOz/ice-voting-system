@@ -1,0 +1,20 @@
+slice {
+    java {
+        files = [file("../Contract.ice")]
+    }
+}
+
+dependencies {
+    implementation 'io.freefair.lombok:io.freefair.lombok.gradle.plugin:8.13.1'
+    implementation 'com.zeroc:ice:3.7.10'
+    implementation 'com.zeroc:icestorm:3.7.10'
+}
+
+jar {
+    manifest {
+        attributes(
+            "Main-Class": project.name.capitalize()+"Main",
+            "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
+        )
+    }
+} 

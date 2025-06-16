@@ -6,3 +6,15 @@ build
 
 # Ignore files .db
 *.db
+
+db/node/
+db/registry/
+
+*.mdb
+
+IceGrid/VotingGrid/src/db/node/*
+IceGrid/VotingGrid/src/db/registry/*
+IceGrid/VotingQuery/src/db/node/*
+IceGrid/VotingQuery/src/db/registry/*
+
+icestorm-config/db/*

@@ -16,7 +16,7 @@
 package Contract;
 
 /** @hidden */
-public class _VotingServicePrxI extends com.zeroc.Ice._ObjectPrxI implements VotingServicePrx
+public class _ConsultServicePrxI extends com.zeroc.Ice._ObjectPrxI implements ConsultServicePrx
 {
     /** @hidden */
     public static final long serialVersionUID = 0L;

@@ -3,17 +3,14 @@ slice {
         files = [file("../Contract.ice")]
     }
 }
-repositories {
-    mavenCentral()
-}
 
 dependencies{
-    implementation 'com.zeroc:ice:3.7.2'
     implementation 'io.freefair.lombok:io.freefair.lombok.gradle.plugin:8.13.1'
 
-    implementation project(':reliableMessaging')
+    implementation 'com.zeroc:icegrid:3.7.10'
+    implementation 'com.zeroc:icestorm:3.7.10'
 
-    implementation files("../reliableMessaging/build/libs/reliableMessaging.jar")
+    implementation project(':reliableMessaging')
 }
 
 jar {

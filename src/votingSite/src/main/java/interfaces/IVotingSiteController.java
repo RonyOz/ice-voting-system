@@ -3,5 +3,5 @@ package interfaces;
 import Contract.Vote;
 
 public interface IVotingSiteController {
-    void processVote(Vote vote);
+  void processVote(Vote vote, String votingNodeID);
 }

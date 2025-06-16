@@ -1,0 +1,20 @@
+slice {
+    java {
+        files = [file("../Contract.ice")]
+    }
+}
+
+dependencies {
+  implementation("com.zaxxer:HikariCP:2.3.2")
+  implementation("org.postgresql:postgresql:42.7.4")
+  implementation('org.javassist:javassist:3.29.2-GA')
+}
+
+jar {
+        manifest {
+            attributes(
+                "Main-Class": project.name.capitalize()+"Main",
+                "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
+            )
+        }
+    }

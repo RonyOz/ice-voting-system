@@ -3,14 +3,12 @@ slice {
         files = [file("../Contract.ice")]
     }
 }
-repositories {
-    mavenCentral()
-}
 
 dependencies{
-    implementation 'com.zeroc:ice:3.7.2'
     // https://mvnrepository.com/artifact/com.h2database/h2
     implementation("com.h2database:h2:2.3.232")
+    implementation("com.zaxxer:HikariCP:2.3.2")
+    implementation("org.postgresql:postgresql:42.7.4")
     implementation project(':reliableMessaging')
 }
 

@@ -4,14 +4,8 @@ slice {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies{
-    implementation 'com.zeroc:ice:3.7.2'
     implementation 'io.freefair.lombok:io.freefair.lombok.gradle.plugin:8.13.1'
-
 }
 
 

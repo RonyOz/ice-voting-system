@@ -5,16 +5,36 @@ module Contract { //Name of the folder where it will be compiled
         string candidateId; // Unique identifier for the candidate
     }
 
+    struct Candidate {
+        string candidateId;
+        string name;
+    }
+
+    sequence<Candidate> CandidateSeq;
+
     interface VotingNode{
         int vote(string voterId, string candidateId);
     }
 
     interface VotingSite{
-        void sendVote(Vote vote);
+        void sendVote(Vote vote,string nodeVoteID);
     }
 
-    // interface VotingService{ // This interface is not used in the current implementation because the definition is the RMDestination of reliable messaging
+    interface AuthService {
+        int authenticate(string voterId, string mesaId);
+    }
 
-    // }
+    interface ConsultService {
+        string getVotingLocation(string voterId);
+        void setCandidates(CandidateSeq candidates);
+        CandidateSeq getCandidates();
+        string getResults();
+        string getResumeCSV();
+        string getPartialCSV();
+    }
+    
+    interface ControlCommand {
+        void receiveCommand(string command);
+    };
     
 }

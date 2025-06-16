@@ -17,38 +17,40 @@ package Contract;
 
 public interface VotingSitePrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void sendVote(Vote vote)
+    default void sendVote(Vote vote, String nodeVoteID)
     {
-        sendVote(vote, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        sendVote(vote, nodeVoteID, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void sendVote(Vote vote, java.util.Map<String, String> context)
+    default void sendVote(Vote vote, String nodeVoteID, java.util.Map<String, String> context)
     {
-        _iceI_sendVoteAsync(vote, context, true).waitForResponse();
+        _iceI_sendVoteAsync(vote, nodeVoteID, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote)
+    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote, String nodeVoteID)
     {
-        return _iceI_sendVoteAsync(vote, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_sendVoteAsync(vote, nodeVoteID, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> sendVoteAsync(Vote vote, String nodeVoteID, java.util.Map<String, String> context)
     {
-        return _iceI_sendVoteAsync(vote, context, false);
+        return _iceI_sendVoteAsync(vote, nodeVoteID, context, false);
     }
 
     /**
      * @hidden
      * @param iceP_vote -
+     * @param iceP_nodeVoteID -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_sendVoteAsync(Vote iceP_vote, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_sendVoteAsync(Vote iceP_vote, String iceP_nodeVoteID, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "sendVote", null, sync, null);
         f.invoke(false, context, null, ostr -> {
                      Vote.ice_write(ostr, iceP_vote);
+                     ostr.writeString(iceP_nodeVoteID);
                  }, null);
         return f;
     }
