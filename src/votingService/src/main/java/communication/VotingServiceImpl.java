@@ -1,3 +1,4 @@
+package communication;
 import com.zeroc.Ice.Current;
 
 import controller.VotingServiceController;

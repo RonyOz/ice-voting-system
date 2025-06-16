@@ -3,9 +3,11 @@ import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Properties;
 import com.zeroc.Ice.Util;
+
+import communication.VotingServiceImpl;
 import controller.VotingServiceController;
 import repository.DBConnection;
-import repository.JdbcVoteRepository;
+import repository.VoteRepository;
 public class VotingServiceMain {
     public static void main(String[] args) {
 
@@ -16,10 +18,9 @@ public class VotingServiceMain {
             Properties properties = communicator.getProperties();
             Identity identity = Util.stringToIdentity(properties.getProperty("Identity"));
 
-            DBConnection dbConnection = new DBConnection(communicator);
-            dbConnection.connectDB();
+            DBConnection dbConnection = DBConnection.getInstance(communicator);
 
-            VotingServiceController controller = new VotingServiceController(new JdbcVoteRepository(dbConnection.getConnection()));
+            VotingServiceController controller = new VotingServiceController(new VoteRepository(dbConnection.connect()));
         
             VotingServiceImpl votingService = new VotingServiceImpl(controller);
 

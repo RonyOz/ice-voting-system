@@ -58,28 +58,30 @@ public class VotingNodeMain {
           for (String candidato : candidatos) {
             System.out.println(candidato);
           }
-          System.out.print("Número: ");
+          System.out.print("Número >> ");
           String opcionCandidato = scanner.nextLine();
           String candidateId = "";
           // Map numeric choice to candidate name
           switch (opcionCandidato) {
             case "1":
-              candidateId = "Juan Pérez";
+              candidateId = "001";
               break;
             case "2":
-              candidateId = "Ana Gómez";
+              candidateId = "002";
               break;
             case "3":
-              candidateId = "Luis Torres";
+              candidateId = "003";
               break;
             case "4":
-              candidateId = "María Ruiz";
+              candidateId = "004";
               break;
             default:
-              System.out.println("Opción no válida. Se usará 'Juan Pérez' por defecto.");
-              candidateId = "Juan Pérez";
+              System.out.println("Opción no válida. Intente de nuevo.");
+              continue;
           }
+
           node.voteCLI(voterId, candidateId);
+
         } else if (option == 2) {
           // Stress test option - sends multiple votes
           adapter.deactivate();
@@ -91,6 +93,7 @@ public class VotingNodeMain {
           fire(node, nodeId, numVotes);
         } else {
           System.out.println("Opción no válida. Intente de nuevo.");
+          continue;
         }
       }
 

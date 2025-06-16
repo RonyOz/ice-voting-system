@@ -1,71 +1,58 @@
 package repository;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Properties;
 
 public class DBConnection {
+  
+  private static DBConnection instance;
+  private final Communicator com;
+  private final HikariDataSource dataSource;
 
-	private Communicator com;
-	private Connection connection;
+  private DBConnection(Communicator com) {
+    this.com = com;
 
-	public DBConnection(Communicator com) {
-		this.com = com;
-	}
+    Properties prop = this.com.getProperties();
+    String jdbcURL = prop.getProperty("ConnectionDB.URL");
+    String username = prop.getProperty("ConnectionDB.Username");
+    String password = prop.getProperty("ConnectionDB.Password");
 
-	public String connectDB() {
+    System.out.println("[DEBUG] DBConnection: URL=" + jdbcURL + ", USER=" + username);
 
-		try {
-			Properties prop = com.getProperties();
-			String jdbcURL = prop.getProperty("ConnectionDB.URL");
-			String username = prop.getProperty("ConnectionDB.Username");
-			String password = prop.getProperty("ConnectionDB.Password");
-			String driverClass = prop.getProperty("ConnectionDB.Driver");
+    HikariConfig config = new HikariConfig();
+    config.setJdbcUrl(jdbcURL);
+    config.setUsername(username);
+    config.setPassword(password);
 
-			Class.forName(driverClass);
-			connection = DriverManager.getConnection(jdbcURL, username,password);
+    config.setMaximumPoolSize(50);
+    config.setMinimumIdle(10);
+    config.setIdleTimeout(30000);
+    config.setMaxLifetime(1800000);
+    config.setConnectionTimeout(2000);
 
-			if (connection == null) {
-				return "Connection failed";
-			}
+    this.dataSource = new HikariDataSource(config);
+    System.out.println("[DEBUG] HikariDataSource inicializado.");
+  }
 
-			System.out.println("[INFO] [H2] Connected to the database successfully.");
-			createSchemaIfNotExists();
+  public static synchronized DBConnection getInstance(Communicator com) {
+    if (instance == null) {
+      instance = new DBConnection(com);
+    }
+    return instance;
+  }
 
-		} catch (ClassNotFoundException e) {
-			System.err.println("[ERROR] [H2] JDBC Driver not found: " + e.getMessage());
-		} catch (SQLException e) {
-			System.err.println("[ERROR] [H2] Connection failed: " + e.getMessage());
-		}
-		return null;
-	}
+  public Connection connect() throws SQLException {
+    return dataSource.getConnection();
+  }
 
-	public Connection getConnection() {
-		return connection;
-	}
-
-	public void closeConnection() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void createSchemaIfNotExists() {
-		String sql = "CREATE TABLE IF NOT EXISTS votes ("
-				+ "voter_id VARCHAR(255) NOT NULL,"
-				+ "candidate_id VARCHAR(255) NOT NULL,"
-				+ "PRIMARY KEY (voter_id, candidate_id)"
-				+ ")";
-		try (var stmt = connection.createStatement()) {
-			stmt.executeUpdate(sql);
-			System.out.println("[INFO] [H2] Schema created successfully.");
-		} catch (SQLException e) {
-			System.err.println("[ERROR] [H2] Failed to create schema: " + e.getMessage());
-		}
-	}
-
+  public void shutdown() {
+    if (dataSource != null) {
+      dataSource.close();
+    }
+  }
 }
