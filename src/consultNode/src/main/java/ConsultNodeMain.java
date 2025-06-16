@@ -13,7 +13,6 @@ public class ConsultNodeMain {
     Scanner scanner = new Scanner(System.in);
 
     try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
-
       // Buscar el proxy por su ID exacto
       QueryPrx query = QueryPrx.checkedCast(
           communicator.stringToProxy("IceQuerySystem/Query"));

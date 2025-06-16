@@ -9,7 +9,7 @@ public class ProxyCacheMain {
   public static void main(String[] args) {
     try (Communicator communicator = Util.initialize(args, "properties.cfg")) {
 
-      ObjectAdapter adapter = communicator.createObjectAdapter("ProxyCache");
+      ObjectAdapter adapter = communicator.createObjectAdapter("ProxyCacheAdapter");
 
       ProxyCacheImpl proxyCache = new ProxyCacheImpl(communicator);
 

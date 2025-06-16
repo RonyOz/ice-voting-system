@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Current;
+import com.zeroc.Ice.ObjectPrx;
 import com.zeroc.IceGrid.QueryPrx;
 
 import Contract.Candidate;
@@ -38,10 +39,10 @@ public class ProxyCacheImpl implements ConsultService {
   }
 
   private void getbackendService(Communicator communicator) {
-    System.out.println("[INFO] Going to fetch a backend service");
-    QueryPrx query = QueryPrx.checkedCast(communicator.propertyToProxy("IceQueryGrid/Query"));
-    backendService = ConsultServicePrx.checkedCast(query.findObjectByType("::Contract::ConsultService"));
-    System.out.println("[INFO] backendService Adquired");
+    QueryPrx query = QueryPrx.checkedCast(
+        communicator.stringToProxy("IceQuerySystem/Query"));
+    ObjectPrx queryFind = query.findObjectByType("::Contract::ConsultService");
+    backendService = ConsultServicePrx.checkedCast(queryFind);
   }
 
   private void startCacheCleanupTask() {
